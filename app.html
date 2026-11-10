@@ -443,6 +443,7 @@ function signOut(){
   SESS=null;PRO=null;saveSess();S.cart={};S.pharm=null;S.hosp=null;S.rx=null;S.ctype=null;$("#v-acct").innerHTML="";closeCart();closeModal();closeFrame();updateCart();showGate("cus");toast("Signed out");
 }
 enter();
+(function(){var j=new URLSearchParams(location.search).get("join");if(!j||SESS)return;if(j==="pharm"||j==="hosp")openFrame("apply",null,j);else showGate("cus",0)})();
 })();
 </script>
 </body>
