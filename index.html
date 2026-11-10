@@ -139,6 +139,13 @@ footer a{display:block;text-decoration:none;padding:3px 0}footer a:hover{color:#
 .finder{margin:0 auto}.fwrap{padding:6px 22px 30px}
 .pc{cursor:pointer}.pc:hover{box-shadow:0 8px 24px #0002}
 @media(max-width:900px){.slide .wrap{min-height:0;padding-bottom:280px;align-items:start;grid-template-columns:1fr}.slide .art{width:100%;height:270px}}
+
+/* photo banner polish */
+.slide.photo{background:linear-gradient(90deg,rgba(37,39,43,.94) 0%,rgba(37,39,43,.72) 48%,rgba(37,39,43,.12) 100%),linear-gradient(180deg,rgba(37,39,43,0) 55%,rgba(37,39,43,.65)),var(--photo) var(--pos,center) /cover no-repeat,#25272B}
+.slide.h{--pos:center 35%}.slide.p{--pos:right center}.slide.d{--pos:center 60%}
+.slide.photo:after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--green),var(--blue));z-index:3}
+.slide.photo .wrap{min-height:520px}
+@media(max-width:900px){.slide.photo{background:linear-gradient(180deg,rgba(37,39,43,.9),rgba(37,39,43,.72) 70%,rgba(37,39,43,.5)),var(--photo) var(--pos,center) /cover no-repeat,#25272B}.slide.photo .wrap{min-height:0;padding-bottom:44px}}
 </style>
 </head>
 <body>
@@ -161,7 +168,7 @@ footer a{display:block;text-decoration:none;padding:3px 0}footer a:hover{color:#
   <div class="slides" id="slides" aria-live="off">
     <div class="slide h on" data-photo="assets/hero-hospital.jpg" style="--photo:url(assets/hero-hospital.jpg)"><div class="wrap"><div><span class="emb hmark" role="img" aria-label="Hosirx logo"></span><h1>Care from your hospital, without the queue</h1><p class="lead">Find a hospital, see its fees up front, register as a new patient and pay online.</p><div class="ctas"><a class="btn g" href="#directory">Find a hospital</a><button class="btn o" data-signup="customer">Sign up free</button></div></div><div class="art" data-scene="hospital" role="img" aria-label="A doctor in a white coat speaking with a patient"></div></div></div>
     <div class="slide p" data-photo="assets/hero-pharmacy.jpg" style="--photo:url(assets/hero-pharmacy.jpg)"><div class="wrap"><div><span class="emb hmark" aria-hidden="true"></span><h2>Medicine from a pharmacy you trust</h2><p class="lead">Compare nearby pharmacies, upload a prescription and order what you need.</p><div class="ctas"><a class="btn g" href="app.html">Shop medicine</a><button class="btn o" data-signup="customer">Sign up free</button></div></div><div class="art" data-scene="pharmacy" role="img" aria-label="A pharmacist handing medicine to a customer"></div></div></div>
-    <div class="slide d" data-photo="assets/hero-delivery.jpg" style="--photo:url(assets/hero-delivery.jpg)"><div class="wrap"><div><span class="emb hmark" aria-hidden="true"></span><h2>Delivered to your door</h2><p class="lead">A rider brings your order. Pay online and follow it until it arrives.</p><div class="ctas"><a class="btn g" href="app.html">Order now</a><button class="btn o" data-signup="partner">List your business</button></div></div><div class="art" data-scene="delivery" role="img" aria-label="A delivery rider handing a parcel to a customer"></div></div></div>
+    <div class="slide d" data-photo="assets/hero-shop.jpg" style="--photo:url(assets/hero-shop.jpg)"><div class="wrap"><div><span class="emb hmark" aria-hidden="true"></span><h2>Browse the shelf from your phone</h2><p class="lead">See what each pharmacy stocks, add it to your cart and get it delivered.</p><div class="ctas"><button class="btn g" data-signup="customer">Start ordering</button><button class="btn o" data-signup="partner">List your business</button></div></div><div class="art" data-scene="delivery" role="img" aria-label="Shelves of medicine in a pharmacy"></div></div></div>
   </div>
   <div class="ctl"><button class="ar" id="prev" aria-label="Previous slide">‹</button><div class="dots" id="dots"></div><button class="ar" id="next" aria-label="Next slide">›</button></div>
   <div class="fwrap"><div class="finder">
