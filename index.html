@@ -81,7 +81,7 @@ footer .emb{width:60px;height:53px}
 .opt label:has(input:focus-visible){outline:3px solid var(--blue)}.opt small{display:block;font-weight:500;color:var(--mute)}
 .box .btn{width:100%}.box .alt{text-align:center;margin-top:14px;font-size:14.5px;color:var(--mute)}.box .alt a{color:var(--blue-d);font-weight:700}
 /* trust strip */
-.trust{margin-top:-34px;padding-top:34px;background:var(--slate);color:#E6E8EB}
+.trust{background:var(--slate);color:#E6E8EB}
 .trust .wrap{display:flex;flex-wrap:wrap;gap:10px 34px;justify-content:space-between;padding-top:16px;padding-bottom:16px;font-weight:600;font-size:14.5px}
 .trust span{display:flex;align-items:center;gap:8px}.trust svg{width:18px;height:18px;color:var(--green)}
 /* sections */
@@ -126,6 +126,19 @@ footer .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:26px}
 footer h4{color:#fff;font-family:var(--head);margin-bottom:10px;font-size:15px}
 footer a{display:block;text-decoration:none;padding:3px 0}footer a:hover{color:#fff}
 .fine{grid-column:1/-1;border-top:1px solid #fff2;padding-top:18px;font-size:13px}
+
+/* full-bleed banner + search fix */
+.slide{position:relative;overflow:hidden}
+.slide.h{--c:#1688FF}.slide.p{--c:#1FB339}.slide.d{--c:#8A8D94}
+.slide.h,.slide.p,.slide.d{background:radial-gradient(900px 520px at 72% 55%,var(--c),#25272B 88%)}
+.slide.photo{background:linear-gradient(90deg,rgba(18,20,24,.9),rgba(18,20,24,.6) 55%,rgba(18,20,24,.3)),var(--photo) center/cover no-repeat,#25272B}
+.slide .wrap{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,540px);justify-content:start;min-height:480px;align-items:center}
+.slide .art{position:absolute;right:0;bottom:0;width:58%;height:100%;pointer-events:none;z-index:1}
+.slide .art svg{width:100%;height:100%;max-width:none;filter:none;margin:0;overflow:visible}
+.slide.photo .art{display:none}
+.finder{margin:0 auto}.fwrap{padding:6px 22px 30px}
+.pc{cursor:pointer}.pc:hover{box-shadow:0 8px 24px #0002}
+@media(max-width:900px){.slide .wrap{min-height:0;padding-bottom:280px;align-items:start;grid-template-columns:1fr}.slide .art{width:100%;height:270px}}
 </style>
 </head>
 <body>
@@ -146,9 +159,9 @@ footer a{display:block;text-decoration:none;padding:3px 0}footer a:hover{color:#
 <main id="main">
 <section class="hero" aria-roledescription="carousel" aria-label="Hosirx highlights">
   <div class="slides" id="slides" aria-live="off">
-    <div class="slide h on"><div class="wrap"><div><span class="emb hmark" role="img" aria-label="Hosirx logo"></span><h1>Care from your hospital, without the queue</h1><p class="lead">Find a hospital, see its fees up front, register as a new patient and pay online.</p><div class="ctas"><a class="btn g" href="#directory">Find a hospital</a><button class="btn o" data-signup="customer">Sign up free</button></div></div><div class="art" data-scene="hospital" role="img" aria-label="A doctor in a white coat speaking with a patient"></div></div></div>
-    <div class="slide p"><div class="wrap"><div><span class="emb hmark" aria-hidden="true"></span><h2>Medicine from a pharmacy you trust</h2><p class="lead">Compare nearby pharmacies, upload a prescription and order what you need.</p><div class="ctas"><a class="btn g" href="app.html">Shop medicine</a><button class="btn o" data-signup="customer">Sign up free</button></div></div><div class="art" data-scene="pharmacy" role="img" aria-label="A pharmacist handing medicine to a customer"></div></div></div>
-    <div class="slide d"><div class="wrap"><div><span class="emb hmark" aria-hidden="true"></span><h2>Delivered to your door</h2><p class="lead">A rider brings your order. Pay online and follow it until it arrives.</p><div class="ctas"><a class="btn g" href="app.html">Order now</a><button class="btn o" data-signup="partner">List your business</button></div></div><div class="art" data-scene="delivery" role="img" aria-label="A delivery rider handing a parcel to a customer"></div></div></div>
+    <div class="slide h on" data-photo="assets/hero-hospital.jpg" style="--photo:url(assets/hero-hospital.jpg)"><div class="wrap"><div><span class="emb hmark" role="img" aria-label="Hosirx logo"></span><h1>Care from your hospital, without the queue</h1><p class="lead">Find a hospital, see its fees up front, register as a new patient and pay online.</p><div class="ctas"><a class="btn g" href="#directory">Find a hospital</a><button class="btn o" data-signup="customer">Sign up free</button></div></div><div class="art" data-scene="hospital" role="img" aria-label="A doctor in a white coat speaking with a patient"></div></div></div>
+    <div class="slide p" data-photo="assets/hero-pharmacy.jpg" style="--photo:url(assets/hero-pharmacy.jpg)"><div class="wrap"><div><span class="emb hmark" aria-hidden="true"></span><h2>Medicine from a pharmacy you trust</h2><p class="lead">Compare nearby pharmacies, upload a prescription and order what you need.</p><div class="ctas"><a class="btn g" href="app.html">Shop medicine</a><button class="btn o" data-signup="customer">Sign up free</button></div></div><div class="art" data-scene="pharmacy" role="img" aria-label="A pharmacist handing medicine to a customer"></div></div></div>
+    <div class="slide d" data-photo="assets/hero-delivery.jpg" style="--photo:url(assets/hero-delivery.jpg)"><div class="wrap"><div><span class="emb hmark" aria-hidden="true"></span><h2>Delivered to your door</h2><p class="lead">A rider brings your order. Pay online and follow it until it arrives.</p><div class="ctas"><a class="btn g" href="app.html">Order now</a><button class="btn o" data-signup="partner">List your business</button></div></div><div class="art" data-scene="delivery" role="img" aria-label="A delivery rider handing a parcel to a customer"></div></div></div>
   </div>
   <div class="ctl"><button class="ar" id="prev" aria-label="Previous slide">‹</button><div class="dots" id="dots"></div><button class="ar" id="next" aria-label="Next slide">›</button></div>
   <div class="fwrap"><div class="finder">
@@ -156,7 +169,7 @@ footer a{display:block;text-decoration:none;padding:3px 0}footer a:hover{color:#
     <form class="frow" id="finder" role="search"><input id="q" type="search" placeholder="Search a pharmacy, e.g. HealthPlus" aria-label="Search"><button class="btn g" id="fgo" type="submit">Search</button></form>
   </div></div>
 </section>
-<div style="height:34px;background:var(--graphite)"></div>
+
 
 <div class="trust"><div class="wrap">
   <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2 3 5v5c0 4 3 7 7 8 4-1 7-4 7-8V5z"/><path d="m7 10 2 2 4-4"/></svg>Verified partners</span>
@@ -210,11 +223,11 @@ footer a{display:block;text-decoration:none;padding:3px 0}footer a:hover{color:#
 
 <div class="mo" id="mo" role="dialog" aria-modal="true" aria-labelledby="mt"><div class="box">
   <button class="x" id="mx" aria-label="Close">×</button>
-  <h2 id="mt">Create your account</h2><p style="color:var(--mute)">Choose how you will use Hosirx.</p>
+  <h2 id="mt">Create your account</h2><p style="color:var(--mute)" id="ctx">Choose how you will use Hosirx.</p>
   <div class="seg" role="tablist" aria-label="Account type"><button role="tab" id="sC" aria-selected="true">Customer</button><button role="tab" id="sP" aria-selected="false">Partner</button></div>
-  <div id="pC"><ul><li>Order medicine from nearby pharmacies</li><li>Register at hospitals and pay online</li><li>Track every order and visit</li></ul><a class="btn g" href="app.html?join=cus">Create customer account</a></div>
+  <div id="pC"><ul><li>Order medicine from nearby pharmacies</li><li>Register at hospitals and pay online</li><li>Track every order and visit</li></ul><a class="btn g" id="cGo" href="app.html?join=cus">Create customer account</a></div>
   <div id="pP" hidden><div class="opt"><label><input type="radio" name="pt" value="pharm" checked>Pharmacy<small>Sell medicine, set prices</small></label><label><input type="radio" name="pt" value="hosp">Hospital<small>Set visit fees, take bookings</small></label></div><a class="btn g" id="pGo" href="app.html?join=pharm">Apply as a partner</a><p class="alt" style="margin-top:10px">Applications are reviewed before your listing goes live.</p></div>
-  <p class="alt">Already have an account? <a href="app.html?join=signin">Sign in</a></p>
+  <p class="alt">Already have an account? <a id="siGo" href="app.html?join=signin">Sign in</a></p>
 </div></div>
 <script src="hs-core.js"></script>
 <script>
@@ -225,7 +238,7 @@ function all(){try{return window.HS.listings("pharm").concat(window.HS.listings(
 var F="all",Q="",mode="pharm";
 function is24(x){return x.kind==="hosp"?!!x.open24:/24/.test(x.open||"")}
 function card(x){var h=x.kind==="hosp";
- return '<article class="pc'+(h?' h':'')+'"><h3>'+esc(x.name)+'</h3><div class="meta"><span>★ '+esc(x.rating)+'</span><span>'+esc(x.km)+' km</span>'+(h?'<span>'+esc(x.type)+'</span>':'<span>~'+esc(x.eta)+' min delivery</span>')+'</div><div><span class="tag'+(is24(x)?' on':'')+'">'+(is24(x)?'Open 24 hours':esc(x.open||'Hours on request'))+'</span></div><div class="go"><a class="btn sm '+(h?'b':'g')+'" href="app.html">'+(h?'View visit fees':'Order medicine')+'</a>'+(x.phone?'<a class="btn sm o" href="tel:'+esc(x.phone)+'">Call</a>':'')+'</div></article>'}
+ return '<article class="pc'+(h?' h':'')+'" data-id="'+esc(x.id)+'" data-k="'+(h?'h':'p')+'" data-name="'+esc(x.name)+'" tabindex="-1"><h3>'+esc(x.name)+'</h3><div class="meta"><span>★ '+esc(x.rating)+'</span><span>'+esc(x.km)+' km</span>'+(h?'<span>'+esc(x.type)+'</span>':'<span>~'+esc(x.eta)+' min delivery</span>')+'</div><div><span class="tag'+(is24(x)?' on':'')+'">'+(is24(x)?'Open 24 hours':esc(x.open||'Hours on request'))+'</span></div><div class="go"><button class="btn sm '+(h?'b':'g')+'" data-pick>'+(h?'Sign up to book':'Sign up to order')+'</button>'+(x.phone?'<a class="btn sm o" href="tel:'+esc(x.phone)+'">Call</a>':'')+'</div></article>'}
 function draw(){var l=all().filter(function(x){return(F==="all"||(F==="24"?is24(x):x.kind===F))&&(!Q||x.name.toLowerCase().indexOf(Q)>-1)}).sort(function(a,b){return a.km-b.km});
  $("#cards").innerHTML=l.length?l.map(card).join(""):'<p class="empty">No partner matches that search. Clear the search or pick a different filter.</p>'}
 document.querySelectorAll(".chip").forEach(function(b){b.onclick=function(){F=b.dataset.f;document.querySelectorAll(".chip").forEach(function(c){c.setAttribute("aria-pressed",c===b)});draw()}});
@@ -237,8 +250,11 @@ draw();
 /* signup modal */
 var mo=$("#mo"),lastF=null;
 function tab(p){$("#sC").setAttribute("aria-selected",!p);$("#sP").setAttribute("aria-selected",p);$("#pC").hidden=p;$("#pP").hidden=!p}
-function openSU(p){lastF=document.activeElement;tab(p==="partner");mo.classList.add("on");$("#mx").focus()}
+function openSU(p,c){lastF=document.activeElement;tab(p==="partner");var q=c?"&"+c.k+"="+encodeURIComponent(c.id):"";
+ $("#cGo").href="app.html?join=cus"+q;$("#siGo").href="app.html?join=signin"+q;
+ $("#ctx").textContent=c&&p!=="partner"?"Create a free account. After you sign in you will go straight to "+c.name+".":"Choose how you will use Hosirx.";mo.classList.add("on");$("#mx").focus()}
 function closeSU(){mo.classList.remove("on");if(lastF)lastF.focus()}
+$("#cards").addEventListener("click",function(e){var c=e.target.closest(".pc");if(!c||e.target.closest("a"))return;openSU("customer",{k:c.dataset.k,id:c.dataset.id,name:c.dataset.name})});
 document.querySelectorAll("[data-signup]").forEach(function(b){b.onclick=function(e){e.preventDefault();openSU(b.dataset.signup)}});
 $("#sC").onclick=function(){tab(false)};$("#sP").onclick=function(){tab(true)};$("#mx").onclick=closeSU;
 mo.onclick=function(e){if(e.target===mo)closeSU()};document.addEventListener("keydown",function(e){if(e.key==="Escape")closeSU()});
@@ -258,7 +274,7 @@ var SC={hospital:['#1688FF',P(150,{skin:SK.b,hair:"short",top:"#fff",acc:"steth"
  pharmacy:['#1FB339',P(150,{skin:SK.c,hair:"long",top:"#1FB339",acc:"bottle"})+P(335,{skin:SK.b,hair:"afro",top:"#1688FF",acc:"none"})],
  delivery:['#8A8D94',P(150,{skin:SK.a,hair:"helmet",top:"#1688FF",acc:"box"})+P(335,{skin:SK.d,hair:"short",top:"#3B3E44",acc:"none"})]};
 document.querySelectorAll("[data-scene]").forEach(function(el){var c=SC[el.dataset.scene];
- el.innerHTML='<svg viewBox="0 0 480 400" aria-hidden="true"><defs><clipPath id="c'+el.dataset.scene+'"><rect width="480" height="400" rx="30"/></clipPath></defs><g clip-path="url(#c'+el.dataset.scene+')"><rect width="480" height="400" fill="#F1F2F4"/><circle cx="380" cy="90" r="150" fill="'+c[0]+'" opacity=".18"/><circle cx="60" cy="360" r="120" fill="'+c[0]+'" opacity=".14"/><path d="M215 40h50v40h40v50h-40v40h-50v-40h-40V80h40z" fill="'+c[0]+'" opacity=".12"/>'+c[1]+'</g></svg>'});
+ el.innerHTML='<svg viewBox="0 0 480 400" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><circle cx="380" cy="110" r="170" fill="#fff" opacity=".10"/><circle cx="70" cy="340" r="130" fill="#fff" opacity=".07"/><path d="M215 30h50v40h40v50h-40v40h-50v-40h-40V70h40z" fill="#fff" opacity=".10"/>'+c[1]+'</svg>'});
 /* slider */
 var sl=document.querySelectorAll(".slide"),cur=0,timer=null,dots=$("#dots");
 sl.forEach(function(_,i){var b=document.createElement("button");b.setAttribute("aria-label","Show slide "+(i+1));b.onclick=function(){show(i,true)};dots.appendChild(b)});
@@ -266,6 +282,7 @@ function show(i,user){cur=(i+sl.length)%sl.length;sl.forEach(function(s,k){s.cla
 function stop(){clearInterval(timer);timer=null}
 $("#prev").onclick=function(){show(cur-1,true)};$("#next").onclick=function(){show(cur+1,true)};
 show(0);
+sl.forEach(function(sd){var im=new Image();im.onload=function(){sd.classList.add("photo")};im.src=sd.dataset.photo});
 if(!matchMedia("(prefers-reduced-motion:reduce)").matches){timer=setInterval(function(){show(cur+1)},6000);var hs=$(".hero");hs.onmouseenter=stop;hs.onfocusin=stop}
 })();
 </script>

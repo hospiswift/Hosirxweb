@@ -437,11 +437,14 @@ function enter(){
   $("#gate").hidden=true;closeFrame();
   if(!S.pharm||!HS.listing(S.pharm))S.pharm=PRO.favP;
   if(!S.hosp||!HS.listing(S.hosp))S.hosp=PRO.favH;
-  updateCart();go("shop");
+  var T=null;try{T=JSON.parse(sessionStorage.getItem("hx_target")||"null")}catch(e){}
+  if(T&&HS.listing(T.id)){sessionStorage.removeItem("hx_target");if(T.k==="p")S.pharm=T.id;else S.hosp=T.id}
+  updateCart();go(T&&T.k==="h"?"hosp":"shop");
 }
 function signOut(){
   SESS=null;PRO=null;saveSess();S.cart={};S.pharm=null;S.hosp=null;S.rx=null;S.ctype=null;$("#v-acct").innerHTML="";closeCart();closeModal();closeFrame();updateCart();showGate("cus");toast("Signed out");
 }
+(function(){var q=new URLSearchParams(location.search),t=q.get("p")?{k:"p",id:q.get("p")}:q.get("h")?{k:"h",id:q.get("h")}:null;if(t){try{sessionStorage.setItem("hx_target",JSON.stringify(t))}catch(e){}}})();
 enter();
 (function(){var j=new URLSearchParams(location.search).get("join");if(!j||SESS)return;if(j==="pharm"||j==="hosp")openFrame("apply",null,j);else showGate("cus",0)})();
 })();
