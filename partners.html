@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Hospiswift Partners – Join as a pharmacy or hospital</title>
+<title>Hosirx Partners – Join as a pharmacy or hospital</title>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--green:#0B7A55;--green-d:#085C41;--green-l:#E3F4EC;--blue:#1565C0;--blue-d:#0D47A1;--blue-l:#E4EEFB;--red:#D32F2F;--ink:#10231C;--mute:#5D6F68;--line:#DCE6E1;--bg:#F5F9F7;
@@ -90,7 +90,7 @@ a.btn{display:block;text-align:center;text-decoration:none}
 </head>
 <body>
 <header>
-  <div class="top"><div class="brand">Hospiswift Partners</div><a class="back" href="index.html">Customer app</a></div>
+  <div class="top"><div class="brand">Hosirx Partners</div><a class="back" href="app.html">Customer app</a></div>
   <p id="hp">Sell medicine or offer care to patients near you.</p>
   <div class="bar" id="bar"><i id="bi"></i></div>
 </header>
@@ -168,13 +168,13 @@ try{var sv=JSON.parse(localStorage.getItem("hs_partner")||"null");if(sv&&sv.type
 function save(){if(DEMO)return;try{localStorage.setItem("hs_partner",JSON.stringify({type:S.type,d:S.d,step:S.step,docs:S.docs,ref:S.ref,stage:S.stage}))}catch(e){}}
 /* Demo accounts (index.html?demo): an approved partner, held in memory only, never saved */
 var SEEDS={
- pharm:{type:"pharm",ref:"HS-PH-DEMO1",d:{name:"HealthPlus Pharmacy",state:"Lagos",city:"Ikeja",addr:"12 Allen Avenue",phone:"08000000002",email:"demo.pharmacy@hospiswift.demo",fVideo:"2000",fVoice:"1500",fChat:"1000",bank:"GTBank",acct:"0123456789",acctName:"HealthPlus Pharmacy Ltd"}},
- hosp:{type:"hosp",ref:"HS-HO-DEMO1",d:{name:"Lagoon General Hospital",state:"Lagos",city:"Ikeja",addr:"5 Obafemi Awolowo Way",phone:"08000000003",email:"demo.hospital@hospiswift.demo",em:true,amb:true,emPhone:"08000000001",fVideo:"8000",fVoice:"6000",fChat:"4000",fIn:"10000",fEmerg:"15000",fFollow:"5000",fSpec:"12000",fAnte:"9000",fReg:"3000",bank:"Access Bank",acct:"0987654321",acctName:"Lagoon General Hospital Ltd"},docs:[{n:"Dr. Adeyemi",m:"MDCN 11111",s:"GP"},{n:"Dr. Okafor",m:"MDCN 22222",s:"Paediatrics"}]}
+ pharm:{type:"pharm",ref:"HS-PH-DEMO1",d:{name:"HealthPlus Pharmacy",state:"Lagos",city:"Ikeja",addr:"12 Allen Avenue",phone:"08000000002",email:"demo.pharmacy@hosirx.demo",fVideo:"2000",fVoice:"1500",fChat:"1000",bank:"GTBank",acct:"0123456789",acctName:"HealthPlus Pharmacy Ltd"}},
+ hosp:{type:"hosp",ref:"HS-HO-DEMO1",d:{name:"Lagoon General Hospital",state:"Lagos",city:"Ikeja",addr:"5 Obafemi Awolowo Way",phone:"08000000003",email:"demo.hospital@hosirx.demo",em:true,amb:true,emPhone:"08000000001",fVideo:"8000",fVoice:"6000",fChat:"4000",fIn:"10000",fEmerg:"15000",fFollow:"5000",fSpec:"12000",fAnte:"9000",fReg:"3000",bank:"Access Bank",acct:"0987654321",acctName:"Lagoon General Hospital Ltd"},docs:[{n:"Dr. Adeyemi",m:"MDCN 11111",s:"GP"},{n:"Dr. Okafor",m:"MDCN 22222",s:"Paediatrics"}]}
 };
 if(SEEDS[DEMO]){var sd=SEEDS[DEMO];S.type=sd.type;S.d=sd.d;S.ref=sd.ref;S.stage=3;S.step=99;if(sd.docs)S.docs=sd.docs}
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function flow(){return FLOW[S.type]}
-/* Embedded inside the Hospiswift sign-in page (index.html?embed=apply|portal) */
+/* Embedded inside the Hosirx sign-in page (app.html?embed=apply|portal) */
 var EMB=new URLSearchParams(location.search).get("embed")||"",IN=window.parent!==window&&(EMB==="apply"||EMB==="portal");
 if(IN){
   var bk0=document.querySelector(".back");
@@ -217,7 +217,7 @@ function render(){
   if(!S.type&&(TYPE==="pharm"||TYPE==="hosp")){S.type=TYPE;S.step=0;S.d={};S.err={};save()}
   if(!S.type){
     $("#bar").style.display="none";$("#hp").textContent="Sell medicine or offer care to patients near you.";
-    app.innerHTML='<h2>Join Hospiswift</h2><p class="sub">Choose how you want to work with us.</p>'+
+    app.innerHTML='<h2>Join Hosirx</h2><p class="sub">Choose how you want to work with us.</p>'+
     '<button class="pick p" data-t="pharm"><span class="em">💊</span><b>I run a pharmacy</b><span>Receive orders, verify prescriptions, and hand over to riders for delivery.</span></button>'+
     '<button class="pick h" data-t="hosp"><span class="em">🏥</span><b>I run a hospital or clinic</b><span>Get found nearby, take emergency calls, and offer consultations.</span></button>'+
     '<div class="perks"><div>Verified partners only</div><div>Weekly payouts</div><div>Riders included</div><div>Free to list</div></div>'+
@@ -270,7 +270,7 @@ function review(){
       var lab=f.t==="check"?f.l.replace(/^I (confirm |will |accept |)/,"").slice(0,38)+"…":f.l;
       return '<div><span>'+esc(lab)+'</span><b>'+esc(v||"—")+'</b></div>'}).join("")+'</div>';
   });
-  h+='<div class="f"><label class="chk"><input type="checkbox" id="agree"><span>I agree to the Hospiswift partner terms and confirm the information above is true.</span></label><div class="msg" id="am" hidden>Please agree to submit.</div></div>'+
+  h+='<div class="f"><label class="chk"><input type="checkbox" id="agree"><span>I agree to the Hosirx partner terms and confirm the information above is true.</span></label><div class="msg" id="am" hidden>Please agree to submit.</div></div>'+
    '<div class="row"><button class="btn out" id="bk">Back</button><button class="btn" id="sub">Submit for review</button></div>';
   $("#app").innerHTML=h;
   $("#bk").onclick=function(){S.step--;save();render();scrollTo(0,0)};
@@ -287,7 +287,7 @@ function done(){
    '<div class="ref">'+S.ref+'</div><ul class="steps" id="st">'+ST.map(function(s,i){return '<li class="'+(i<S.stage?'done':i===S.stage?'now':'')+'">'+s+'</li>'}).join("")+'</ul>'+
    (S.stage>=3?'<div class="rev"><h3>Next</h3><div><span>'+(pharm?'Upload stock, set prices, switch to online and start receiving orders.':'Confirm your emergency line and doctor slots, then go live to nearby patients.')+'</span></div></div>':'')+
    (IN&&EMB==="portal"?'':'<button class="btn out" id="rs">Start a new application</button>')+
-   (IN&&EMB==="apply"?'<p class="note">Once approved, sign in from the Hospiswift home screen with '+esc(S.d.email||"your email")+'.</p>':'');
+   (IN&&EMB==="apply"?'<p class="note">Once approved, sign in from the Hosirx home screen with '+esc(S.d.email||"your email")+'.</p>':'');
   var rs=$("#rs");if(rs)rs.onclick=function(){S={type:null,step:0,d:{},err:{},docs:[{n:"",m:"",s:""}]};save();render()};
   if(S.stage<3){clearTimeout(done.t);done.t=setTimeout(function(){S.stage++;save();done()},2500)}
 }
@@ -477,7 +477,7 @@ function vBook(){
   return h+(l.length?lst(l.map(function(b){
     var live=HS.isLive(b.mode),id=' data-i="'+esc(b.id)+'"',A="";
     if(b.st==="confirmed"){
-      if(live&&WEB)A='<div class="s" style="flex:1;align-self:center">Live calls run in the Hospiswift app.</div>';
+      if(live&&WEB)A='<div class="s" style="flex:1;align-self:center">Live calls run in the Hosirx app.</div>';
       else A='<button class="btn out" data-a="bns"'+id+'>No-show</button><button class="btn" data-a="bst"'+id+'>'+(live?"Start "+esc(b.mode.toLowerCase()):"Check in")+'</button>';
     }else if(b.st==="inprogress")A=(live&&!WEB?'<button class="btn out" data-a="broom"'+id+'>Rejoin room</button>':'')+'<button class="btn" data-a="bdone"'+id+'>Mark completed</button>';
     return '<div class="card"><div class="r"><div><div class="t">'+esc(b.pat)+'</div><div class="s">'+esc(b.doc||(b.kind==="reg"?"Hospital number "+esc(b.hn||""):"Any available doctor"))+'</div></div><span class="'+BST[b.st][1]+'">'+BST[b.st][0]+'</span></div>'+

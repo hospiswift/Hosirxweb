@@ -1,4 +1,4 @@
-/* Hospiswift shared core.
+/* Hosirx shared core.
    Used by the app, the website and the partner dashboards.
    It stands in for the backend: listings, partner-set fees, stock, orders, visits (bookings,
    tickets, registrations) and profiles live in localStorage, so the customer side and the partner
@@ -125,7 +125,7 @@
     return new Promise(function (resolve) {
       var ref = "HSP" + Date.now().toString(36).toUpperCase().slice(-6) + Math.floor(10 + Math.random() * 90);
       if (HS.config.paystackKey) { /* live gateway (not exercised in the demo) */
-        var go = function () { w.PaystackPop.setup({ key: HS.config.paystackKey, email: o.email || "customer@hospiswift.app", amount: Math.round(o.amount * 100), currency: "NGN", ref: ref,
+        var go = function () { w.PaystackPop.setup({ key: HS.config.paystackKey, email: o.email || "customer@hosirx.app", amount: Math.round(o.amount * 100), currency: "NGN", ref: ref,
           callback: function (r) { resolve({ ref: r.reference, method: "paystack", amount: o.amount, at: Date.now() }); }, onClose: function () { resolve(null); } }).openIframe(); };
         if (w.PaystackPop) return go();
         var sc = document.createElement("script"); sc.src = "https://js.paystack.co/v1/inline.js"; sc.onload = go; sc.onerror = function () { resolve(null); }; document.head.appendChild(sc); return;
@@ -133,7 +133,7 @@
       pcss();
       var st = { m: "card", busy: false, done: null, bank: "GTBank", acct: String(Math.floor(1e9 + Math.random() * 9e9)) };
       var bg = document.createElement("div"); bg.className = "hsp-bg";
-      bg.innerHTML = '<div class="hsp" role="dialog" aria-modal="true" aria-label="Payment"><div class="hsp-top"><b>Hospiswift Pay</b><button class="hsp-x" data-x aria-label="Close payment">✕</button></div>' +
+      bg.innerHTML = '<div class="hsp" role="dialog" aria-modal="true" aria-label="Payment"><div class="hsp-top"><b>Hosirx Pay</b><button class="hsp-x" data-x aria-label="Close payment">✕</button></div>' +
         '<div class="hsp-amt">' + HS.naira(o.amount) + '<span>' + HS.esc(o.title || "Payment") + '</span></div><div id="hspTabs"></div><div id="hspBody"></div><p class="hsp-note">Demo checkout. No money moves. Never enter a real card here.</p></div>';
       document.body.appendChild(bg);
       var prevFocus = document.activeElement;
@@ -151,7 +151,7 @@
         else if (st.m === "card") h = '<div class="hsp-f"><label for="hc-n">Card number</label><input id="hc-n" inputmode="numeric" autocomplete="off" maxlength="23" placeholder="0000 0000 0000 0000"></div>' +
           '<div class="hsp-r"><div class="hsp-f"><label for="hc-e">Expiry</label><input id="hc-e" inputmode="numeric" autocomplete="off" maxlength="5" placeholder="MM/YY"></div><div class="hsp-f"><label for="hc-c">CVV</label><input id="hc-c" type="password" inputmode="numeric" autocomplete="off" maxlength="4" placeholder="123"></div></div>' +
           '<div class="hsp-hint">Test card: 4084 0840 8408 4081 · any future date · CVV 408</div><div class="hsp-err" id="hspErr" role="alert" hidden></div><button class="hsp-go" data-card>Pay ' + HS.naira(o.amount) + '</button>';
-        else if (st.m === "bank") h = '<div class="hsp-box">Transfer exactly ' + HS.naira(o.amount) + ' to<b>' + st.acct + '</b>Wema Bank · Hospiswift Pay (demo account)<br>This account expires in 30 minutes.</div><button class="hsp-go" data-bank>I have sent the money</button>';
+        else if (st.m === "bank") h = '<div class="hsp-box">Transfer exactly ' + HS.naira(o.amount) + ' to<b>' + st.acct + '</b>Wema Bank · Hosirx Pay (demo account)<br>This account expires in 30 minutes.</div><button class="hsp-go" data-bank>I have sent the money</button>';
         else h = '<div class="hsp-f"><label for="hu-b">Your bank</label><select id="hu-b">' + Object.keys(BANKS).map(function (b) { return '<option' + (b === st.bank ? " selected" : "") + '>' + b + '</option>'; }).join("") + '</select></div>' +
           '<div class="hsp-box">Dial this code on your phone<b id="hspUssd">*' + BANKS[st.bank] + '*000*' + Math.round(o.amount) + '#</b>Then confirm with your PIN.</div><button class="hsp-go" data-ussd>I have paid</button>';
         $("#hspBody").innerHTML = h;

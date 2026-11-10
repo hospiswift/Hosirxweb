@@ -3,446 +3,210 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0B7A55">
-<title>Hospiswift – Pharmacy & Hospital</title>
-<meta name="description" content="Order medicine from your favourite pharmacy and register and pay for hospital consultations online.">
+<meta name="theme-color" content="#2A2C30">
+<title>Hosirx – Pharmacies and hospitals in one place</title>
+<meta name="description" content="Order medicine from trusted pharmacies, find hospitals, register and pay online. Hosirx brings them together.">
+<link rel="icon" href="assets/hosirx-mark.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--green:#0B7A55;--green-d:#085C41;--green-l:#E3F4EC;--blue:#1565C0;--blue-d:#0D47A1;--blue-l:#E4EEFB;--red:#D32F2F;--red-l:#FDE8E8;
-  --ink:#10231C;--mute:#5D6F68;--line:#DCE6E1;--bg:#F5F9F7;--card:#fff;--accent:var(--green);--accent-d:var(--green-d);--accent-l:var(--green-l)}
-body.hosp{--accent:var(--blue);--accent-d:var(--blue-d);--accent-l:var(--blue-l);--bg:#F4F8FD;--line:#D9E4F2}
+:root{--graphite:#25272B;--slate:#3B3E44;--steel:#8A8D94;--mist:#F1F2F4;--white:#fff;--green:#1FB339;--green-d:#128A28;--blue:#1688FF;--blue-d:#0B63C9;--red:#D93025;
+--ink:#1B1D21;--mute:#5E626A;--line:#DADCE0;--head:Sora,system-ui,sans-serif;--body:Figtree,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Figtree,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;transition:background .3s}
-button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}input,select,textarea{font:inherit}
-a{color:var(--accent-d)}
-:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
-.skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:999}
-/* top bar */
-.bar{background:#fff;border-bottom:1.5px solid var(--line);position:sticky;top:0;z-index:20}
-.bar .wrap{display:flex;align-items:center;gap:14px;min-height:66px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
-.brand{font-weight:800;font-size:22px;letter-spacing:-.4px;display:flex;align-items:center;gap:8px;color:var(--accent-d)}.brand svg{width:30px;height:30px;color:var(--accent)}
-.links{display:flex;gap:4px;margin-left:10px}.links button{padding:9px 14px;border-radius:10px;font-weight:700;color:var(--mute);white-space:nowrap}
-.links button.on{background:var(--accent-l);color:var(--accent-d)}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{font-family:var(--body);color:var(--ink);background:var(--mist);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+h1,h2,h3{font-family:var(--head);line-height:1.12;letter-spacing:-.02em}
+.skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:99}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;padding:13px 22px;border-radius:12px;text-decoration:none;transition:transform .15s,background .15s}
+.btn:active{transform:scale(.98)}
+.btn.g{background:var(--green);color:#06260D}.btn.g:hover{background:#27c944}
+.btn.b{background:var(--blue);color:#fff}.btn.b:hover{background:#2d96ff}
+.btn.o{border:1.5px solid currentColor}
+.btn.sm{padding:9px 16px;font-size:14px;border-radius:10px}
+/* emergency strip + nav */
+.sos{background:var(--red);color:#fff;font-size:14px;font-weight:600;text-align:center;padding:8px 16px}.sos a{font-weight:800}
+.nav{background:var(--graphite);color:#fff;position:sticky;top:0;z-index:30;border-bottom:1px solid #fff1}
+.nav .wrap{display:flex;align-items:center;gap:22px;min-height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--head);font-weight:800;font-size:25px;letter-spacing:-.03em}
+.logo img{width:44px;height:38px;object-fit:cover;border-radius:8px}
+.logo b{color:var(--green)}.logo i{color:var(--blue);font-style:normal}
+.nav ul{display:flex;gap:6px;list-style:none;margin-left:12px}
+.nav ul a{padding:8px 13px;border-radius:9px;text-decoration:none;font-weight:600;color:#D5D7DB}.nav ul a:hover{background:#fff1;color:#fff}
 .sp{flex:1}
-.pill{display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:99px;font-weight:700;font-size:14px;background:var(--accent-l);color:var(--accent-d);position:relative}
-.pill.red{background:var(--red);color:#fff;text-decoration:none}
-.pill .n{background:var(--red);color:#fff;border-radius:99px;min-width:20px;text-align:center;font-size:12px;padding:1px 6px}
-@media(max-width:820px){.links{order:5;width:100%;margin:0;overflow-x:auto}.bar .wrap{gap:8px}}
-main{padding:22px 0 80px}
-h1{font-size:28px;letter-spacing:-.5px}h2{font-size:19px;font-weight:800;margin:26px 0 12px}h3{font-size:17px}
-.view{display:none}.view.on{display:block}
-.banner{background:var(--accent-l);border-radius:20px;padding:20px 22px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:18px}
-.banner .grow{flex:1;min-width:220px}.banner p{color:var(--mute);font-size:14px;margin-top:3px}
-.card{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:18px;margin-bottom:14px}
-.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.grow{flex:1;min-width:0}
-.t{font-weight:700}.s{font-size:13.5px;color:var(--mute)}
-.tag{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:6px;background:var(--accent-l);color:var(--accent-d)}
-.tag.rx{background:#FFF1DC;color:#9A5B00}.tag.red{background:var(--red-l);color:var(--red)}.tag.gr{background:#EEF1F0;color:var(--mute)}
-.btn{background:var(--accent);color:#fff;font-weight:700;padding:12px 18px;border-radius:12px;display:inline-block;text-decoration:none;text-align:center}
-.btn.out{background:#fff;color:var(--accent-d);border:1.5px solid var(--accent)}.btn.red{background:var(--red)}.btn.full{width:100%;padding:14px}.btn.sm{padding:8px 14px;font-size:14px}
-.btn:disabled{opacity:.45;cursor:not-allowed}
-.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{padding:8px 14px;border-radius:99px;background:#fff;border:1.5px solid var(--line);font-weight:600;font-size:14px}.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
-.search{display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:0 14px;flex:1;min-width:220px}
-.search input{flex:1;border:0;padding:13px 0;outline:0;background:none;color:var(--ink);min-width:0}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
-.prod{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:6px}
-.prod .ph{height:84px;border-radius:12px;background:var(--accent-l);color:var(--accent);display:grid;place-items:center;margin-bottom:4px}.prod .ph svg{width:40px;height:40px}
-.price{font-weight:800;font-size:18px}
-.qty{display:flex;align-items:center;gap:10px;justify-content:center}.qty button{width:34px;height:34px;border-radius:10px;background:var(--accent-l);color:var(--accent-d);font-weight:800;font-size:18px}.qty button:disabled{opacity:.4}
-.upload{border:2px dashed var(--accent);border-radius:14px;padding:14px;text-align:center;color:var(--accent-d);font-weight:700;display:block;cursor:pointer;background:#fff}.upload input{display:none}
-.two{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;align-items:start}@media(max-width:900px){.two{grid-template-columns:1fr}}
-.feelist div{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);font-size:14.5px}.feelist div:last-child{border:0}
-.notice{background:#fff;border:1.5px dashed var(--accent);border-radius:16px;padding:16px;display:flex;gap:12px;align-items:center}.notice b{display:block}
-.steps{list-style:none;margin:12px 0}.steps li{padding:8px 0 8px 30px;position:relative;color:var(--mute);font-size:14px}
-.steps li:before{content:"";position:absolute;left:4px;top:11px;width:14px;height:14px;border-radius:50%;border:2px solid var(--line);background:#fff}
-.steps li.done{color:var(--ink);font-weight:600}.steps li.done:before{background:var(--green);border-color:var(--green)}.steps li.now:before{border-color:var(--green);box-shadow:0 0 0 4px var(--green-l)}
-.otp{font-size:26px;font-weight:800;letter-spacing:6px;color:var(--green-d);background:var(--green-l);border-radius:12px;text-align:center;padding:8px}
-.ticket{border:2px dashed var(--accent);border-radius:16px;padding:16px;text-align:center;background:var(--accent-l);margin-top:10px}.ticket b{font-size:30px;letter-spacing:4px;display:block;color:var(--accent-d)}
-.empty{text-align:center;color:var(--mute);padding:44px 10px}
-.gf{margin-bottom:14px}.gf label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}
-input.in,select.in,textarea.in,.gf input,.gf select,.gf textarea{width:100%;padding:13px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
-.gmsg{color:var(--red);font-size:13px;font-weight:600;margin-top:6px}
-.sum div{display:flex;justify-content:space-between;padding:5px 0;font-size:14.5px}.sum .tot{font-weight:800;font-size:18px;border-top:1.5px solid var(--line);margin-top:6px;padding-top:10px}
-/* drawer + modal */
-.ov{position:fixed;inset:0;background:rgba(10,25,20,.5);z-index:60;display:none}.ov.on{display:block}
-.drawer{position:fixed;top:0;right:0;bottom:0;width:420px;max-width:100%;background:var(--bg);z-index:70;padding:20px;overflow:auto;transform:translateX(105%);transition:transform .25s}.drawer.on{transform:none}
-.modal{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(10,25,20,.5)}.modal.on{display:flex}
-.modal>div{background:var(--bg);border-radius:22px;padding:22px;max-width:520px;width:100%;max-height:92vh;overflow:auto}
-.toast{position:fixed;top:14px;left:50%;transform:translateX(-50%) translateY(-90px);background:var(--ink);color:#fff;padding:11px 18px;border-radius:12px;font-weight:600;font-size:14px;z-index:400;transition:transform .3s;max-width:90%;text-align:center}.toast.on{transform:translateX(-50%) translateY(0)}
-.note{font-size:12.5px;color:var(--mute);text-align:center;margin-top:18px}
-/* sign in */
-.gate{position:fixed;inset:0;background:linear-gradient(160deg,var(--accent-l),var(--bg) 60%);z-index:90;overflow:auto;display:flex;justify-content:center;padding:24px 16px}.gate[hidden]{display:none}
-.gbox{width:100%;max-width:460px;margin:auto}
-.gbrand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:24px;color:var(--accent-d)}.gbrand svg{width:36px;height:36px;color:var(--accent)}
-.gate h1{margin-top:20px;font-size:30px}
-.seg{display:grid;grid-template-columns:repeat(3,1fr);background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:4px;margin:18px 0 20px}.seg button{padding:11px 0;border-radius:10px;font-weight:700;color:var(--mute)}.seg button[aria-selected=true]{background:var(--accent);color:#fff}
-.gate input.code{font-size:24px;font-weight:800;letter-spacing:8px;text-align:center}
-.demo{background:var(--accent-l);color:var(--accent-d);border-radius:12px;padding:10px 12px;font-size:13px;margin:10px 0 14px}.demo b{font-size:18px;letter-spacing:3px}
-.or{display:flex;align-items:center;gap:10px;color:var(--mute);font-size:13px;margin:22px 0 12px}.or:before,.or:after{content:"";flex:1;height:1.5px;background:var(--line)}
-.demos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.demos button{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:12px 4px;font-weight:700;font-size:14px;display:flex;flex-direction:column;align-items:center;gap:4px}.demos button span{font-size:24px}
-.gsos{display:block;text-align:center;margin-top:20px;padding:12px;border-radius:12px;background:var(--red-l);color:var(--red);font-weight:800;text-decoration:none}
-.pframe{position:fixed;inset:0;z-index:100;background:var(--bg);display:none}.pframe.on{display:block}.pframe iframe{display:block;border:0;width:100%;height:100%}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media(max-width:860px){.nav ul{display:none}.nav .hide{display:none}}
+/* hero */
+.hero{background:radial-gradient(900px 520px at 78% 40%,#6E6D72 0%,#45464B 45%,var(--graphite) 100%);color:#fff;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center;padding-top:56px;padding-bottom:64px}
+.hero h1{font-size:clamp(34px,5.2vw,60px);font-weight:800}
+.hero h1 b{color:var(--green)}.hero h1 i{color:#4FA8FF;font-style:normal}
+.hero p.lead{font-size:18px;color:#DADCE0;max-width:48ch;margin:18px 0 26px}
+.finder{background:#fff;color:var(--ink);border-radius:18px;padding:8px;max-width:560px;box-shadow:0 18px 50px #0006}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.tabs button{padding:12px;border-radius:12px;font-weight:700;color:var(--mute)}
+.tabs button[aria-selected=true]{color:#fff}
+#tabP[aria-selected=true]{background:var(--green-d)}#tabH[aria-selected=true]{background:var(--blue-d)}
+.frow{display:flex;gap:8px;padding:10px 6px 6px}
+.frow input{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font:inherit;color:var(--ink)}
+.hero .art{display:grid;place-items:center}
+.hero .art img{width:min(100%,470px);aspect-ratio:1;object-fit:cover;border-radius:28px;box-shadow:0 30px 80px #0007;animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(26px) scale(.97)}}
+@media(prefers-reduced-motion:reduce){.hero .art img{animation:none}}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr;padding-top:36px}.hero .art{order:-1}.hero .art img{width:min(70%,300px)}}
+/* trust strip */
+.trust{background:var(--slate);color:#E6E8EB}
+.trust .wrap{display:flex;flex-wrap:wrap;gap:10px 34px;justify-content:space-between;padding-top:16px;padding-bottom:16px;font-weight:600;font-size:14.5px}
+.trust span{display:flex;align-items:center;gap:8px}.trust svg{width:18px;height:18px;color:var(--green)}
+/* sections */
+section.s{padding:66px 0}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+.sh h2{font-size:clamp(26px,3.4vw,38px);font-weight:700}.sh p{color:var(--mute);max-width:52ch;margin-top:8px}
+.svc{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:800px){.svc{grid-template-columns:1fr}}
+.panel{border-radius:24px;padding:32px;color:#fff;display:flex;flex-direction:column;gap:14px}
+.panel.p{background:linear-gradient(150deg,#16A031,#0C6B1E)}.panel.h{background:linear-gradient(150deg,#1A7FEA,#0A4DA8)}
+.panel h3{font-size:28px}.panel ul{list-style:none;display:grid;gap:8px}
+.panel li{display:flex;gap:10px;align-items:flex-start}.panel li:before{content:"";flex:none;width:18px;height:18px;margin-top:3px;border-radius:50%;background:#fff3 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='m5 10 3.5 3.5L15 7' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E")}
+.panel .btn{align-self:flex-start;margin-top:auto;background:#fff;color:var(--ink)}
+/* directory */
+.dir{background:#fff}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.chip{padding:9px 16px;border-radius:99px;border:1.5px solid var(--line);font-weight:600;font-size:14.5px;background:#fff}
+.chip[aria-pressed=true]{background:var(--graphite);border-color:var(--graphite);color:#fff}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.pc{background:var(--mist);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:10px;border-top:5px solid var(--green)}
+.pc.h{border-top-color:var(--blue)}
+.pc h3{font-size:18px;letter-spacing:-.01em}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--mute)}
+.tag{font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:99px;background:#fff;border:1px solid var(--line)}
+.tag.on{background:#E4F7E8;border-color:#BFE8C8;color:var(--green-d)}
+.pc .go{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
+.empty{grid-column:1/-1;color:var(--mute);padding:30px 0}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s;list-style:none}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}}@media(max-width:520px){.steps{grid-template-columns:1fr}}
+.steps li{counter-increment:s;padding-top:18px;border-top:3px solid var(--steel)}
+.steps li:nth-child(odd){border-color:var(--green)}.steps li:nth-child(even){border-color:var(--blue)}
+.steps li:before{content:counter(s);font-family:var(--head);font-weight:800;font-size:15px;color:var(--mute)}
+.steps h3{font-size:18px;margin:6px 0}.steps p{color:var(--mute);font-size:15px}
+/* partner */
+.join{background:var(--graphite);color:#fff;border-radius:26px;padding:42px;display:flex;gap:26px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.join h2{font-size:clamp(24px,3vw,34px);max-width:20ch}.join p{color:#C9CBD0;margin-top:10px;max-width:50ch}
+/* footer */
+footer{background:var(--graphite);color:#C9CBD0;padding:44px 0 28px;margin-top:66px}
+footer .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:26px}
+@media(max-width:700px){footer .wrap{grid-template-columns:1fr}}
+footer h4{color:#fff;font-family:var(--head);margin-bottom:10px;font-size:15px}
+footer a{display:block;text-decoration:none;padding:3px 0}footer a:hover{color:#fff}
+.fine{grid-column:1/-1;border-top:1px solid #fff2;padding-top:18px;font-size:13px}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<header class="bar" id="bar">
+<div class="sos">Medical emergency? Call <a href="tel:112">112</a> now. Do not wait for an online booking.</div>
+<header class="nav">
   <div class="wrap">
-    <div class="brand"><svg viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="8" fill="currentColor"/><path d="M13 8h6v5h5v6h-5v5h-6v-5H8v-6h5z" fill="#fff"/></svg>Hospiswift</div>
-    <nav class="links" aria-label="Sections" id="links">
-      <button data-v="shop" class="on">Pharmacy shop</button>
-      <button data-v="hosp">Hospital</button>
-      <button data-v="orders">My orders</button>
-      <button data-v="acct">Account</button>
-    </nav>
+    <a class="logo" href="index.html" aria-label="Hosirx home"><img src="assets/hosirx-mark.webp" alt="" width="44" height="38"><span><b>Hosi</b><i>rx</i></span></a>
+    <nav aria-label="Main"><ul>
+      <li><a href="#services">Services</a></li><li><a href="#directory">Find care</a></li><li><a href="#how">How it works</a></li><li><a href="#partners">For partners</a></li>
+    </ul></nav>
     <div class="sp"></div>
-    <a class="pill red" href="tel:112">🚨 Emergency 112</a>
-    <button class="pill" id="cartBtn" aria-label="Open cart">🛒 Cart <span class="n" id="cartN">0</span></button>
+    <a class="btn o sm hide" href="partners.html">Partner sign-in</a>
+    <a class="btn g sm" href="app.html">Open Hosirx</a>
   </div>
 </header>
 
-<main id="main"><div class="wrap">
-  <section class="view on" id="v-shop"></section>
-  <section class="view" id="v-hosp"></section>
-  <section class="view" id="v-orders"></section>
-  <section class="view" id="v-acct"></section>
-  <p class="note">Demo prototype. Not a medical service. In an emergency call 112. Video and voice consultations and appointment booking are available in the Hospiswift app.</p>
-</div></main>
-
-<div class="ov" id="ov"></div>
-<aside class="drawer" id="drawer" aria-label="Cart" role="dialog" aria-modal="true"></aside>
-<div class="modal" id="modal" role="dialog" aria-modal="true"><div id="modalBody"></div></div>
-<div class="toast" id="toast" role="status"></div>
-
-<!-- SIGN IN: customer, pharmacy, hospital -->
-<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gTitle" hidden>
-  <div class="gbox">
-    <div class="gbrand"><svg viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="8" fill="currentColor"/><path d="M13 8h6v5h5v6h-5v5h-6v-5H8v-6h5z" fill="#fff"/></svg>Hospiswift</div>
-    <h1 id="gTitle">Welcome</h1>
-    <p class="s" id="gSub" style="margin-top:4px"></p>
-    <div class="seg" role="tablist" aria-label="Sign in as" id="gTabs">
-      <button role="tab" id="tCus" aria-selected="true">Customer</button>
-      <button role="tab" id="tPh" aria-selected="false">Pharmacy</button>
-      <button role="tab" id="tHo" aria-selected="false">Hospital</button>
+<main id="main">
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h1><b>Medicine</b> from your pharmacy. <i>Care</i> from your hospital.</h1>
+      <p class="lead">Hosirx puts verified pharmacies and hospitals on one page. Order medicine for delivery, register at a hospital and pay online.</p>
+      <div class="finder">
+        <div class="tabs" role="tablist" aria-label="What are you looking for">
+          <button role="tab" id="tabP" aria-selected="true">Medicine</button>
+          <button role="tab" id="tabH" aria-selected="false">Hospital</button>
+        </div>
+        <form class="frow" id="finder" role="search">
+          <input id="q" type="search" placeholder="Search a pharmacy, e.g. HealthPlus" aria-label="Search">
+          <button class="btn g" id="fgo" type="submit">Search</button>
+        </form>
+      </div>
     </div>
-    <div id="gForm"></div>
-    <a class="gsos" href="tel:112">🚨 Emergency? Call 112, no sign-in needed</a>
-    <p class="note">Demo prototype. Codes are shown on screen because no SMS or email service is connected yet.</p>
+    <div class="art"><img src="assets/hosirx-logo.webp" alt="Hosirx logo: a green cross and blue shield around a leaf and capsule" width="470" height="470"></div>
   </div>
-</div>
+</section>
 
-<!-- PARTNER DASHBOARD (partners.html embedded) -->
-<div class="pframe" id="pframe"><iframe id="pf" title="Hospiswift partner dashboard" src="about:blank"></iframe></div>
+<div class="trust"><div class="wrap">
+  <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2 3 5v5c0 4 3 7 7 8 4-1 7-4 7-8V5z"/><path d="m7 10 2 2 4-4"/></svg>Verified partners</span>
+  <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="14" height="12" rx="2"/><path d="M3 8h14"/></svg>Secure online payment</span>
+  <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg>24-hour options</span>
+  <span><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 3h9l3 3v11H4z"/><path d="M7 9h6M7 13h6"/></svg>Prescription upload</span>
+</div></div>
+
+<section class="s" id="services"><div class="wrap">
+  <div class="sh"><div><h2>Two services, one account</h2><p>Use the pharmacy side, the hospital side, or both.</p></div></div>
+  <div class="svc">
+    <article class="panel p"><h3>Pharmacy</h3>
+      <ul><li>Compare nearby pharmacies and their opening hours</li><li>Add medicine to a cart and pay online</li><li>Upload a prescription for items that need one</li><li>Track your order until it reaches you</li></ul>
+      <a class="btn" href="app.html">Shop medicine</a></article>
+    <article class="panel h"><h3>Hospital</h3>
+      <ul><li>Browse hospitals by type, distance and rating</li><li>See each hospital's visit fees before you book</li><li>Register as a new patient and pay online</li><li>Get a ticket to show at reception</li></ul>
+      <a class="btn" href="app.html">Find a hospital</a></article>
+  </div>
+</div></section>
+
+<section class="s dir" id="directory"><div class="wrap">
+  <div class="sh"><div><h2>Find care near you</h2><p>Sorted by distance. Open any listing in Hosirx to order or book.</p></div></div>
+  <div class="chips" role="group" aria-label="Filter"><button class="chip" data-f="all" aria-pressed="true">All</button><button class="chip" data-f="pharm" aria-pressed="false">Pharmacies</button><button class="chip" data-f="hosp" aria-pressed="false">Hospitals</button><button class="chip" data-f="24" aria-pressed="false">Open 24 hours</button></div>
+  <div class="cards" id="cards" aria-live="polite"></div>
+</div></section>
+
+<section class="s" id="how"><div class="wrap">
+  <div class="sh"><div><h2>How it works</h2></div></div>
+  <ol class="steps">
+    <li><h3>Choose a partner</h3><p>Pick a pharmacy or hospital from the list.</p></li>
+    <li><h3>Order or register</h3><p>Add medicine to your cart, or choose a hospital visit.</p></li>
+    <li><h3>Pay online</h3><p>Pay securely. The fee shown is the fee you pay.</p></li>
+    <li><h3>Receive or attend</h3><p>Get your medicine delivered, or show your ticket at the hospital.</p></li>
+  </ol>
+</div></section>
+
+<section id="partners"><div class="wrap">
+  <div class="join">
+    <div><h2>Run a pharmacy or hospital?</h2><p>List your business on Hosirx, set your own fees and manage orders and visits from one dashboard.</p></div>
+    <a class="btn b" href="partners.html">Join as a partner</a>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div><a class="logo" href="index.html" style="padding:0 0 10px"><img src="assets/hosirx-mark.webp" alt="" width="44" height="38"><span><b>Hosi</b><i>rx</i></span></a><p>Pharmacies and hospitals in one place.</p></div>
+  <div><h4>Hosirx</h4><a href="app.html">Open the app</a><a href="#directory">Find care</a><a href="#how">How it works</a></div>
+  <div><h4>Partners</h4><a href="partners.html">Join as a partner</a><a href="partners.html">Partner sign-in</a><a href="tel:112">Emergency: 112</a></div>
+  <p class="fine">Demo prototype. Hosirx does not replace medical advice. In an emergency call 112.</p>
+</div></footer>
 
 <script src="hs-core.js"></script>
 <script>
-(function(){
-"use strict";
-var $=function(s){return document.querySelector(s)};
-var naira=HS.naira,esc=HS.esc;
-var STAGES=["Pharmacist verifying order","Pharmacy preparing items","Rider assigned","Rider on the way","Delivered"];
-var OSEQ=["new","preparing","ready","out","done"];
-var RIDERS=["Tunde A.","Chidi O.","Musa I.","Sade B."];
-var DEMO_ACCOUNTS=true; /* set to false to remove the demo buttons */
-var PERSIST_LOGIN=false; /* true: stay signed in after the tab closes. false: each tab has its own login, so you can try the customer and a partner side by side */
-var STORE=PERSIST_LOGIN?localStorage:sessionStorage,SKEY="hospiswift_web_session",SESS=null,PRO=null,G={role:"cus",step:0,id:"",code:""},FR={mode:null};
-var S={view:"shop",cat:"All",q:"",cart:{},pharm:null,hosp:null,rx:null,ctype:null,cdoc:"",reason:""};
-try{SESS=JSON.parse(STORE.getItem(SKEY)||"null")}catch(e){}
-function saveSess(){try{if(SESS)STORE.setItem(SKEY,JSON.stringify(SESS));else STORE.removeItem(SKEY)}catch(e){}}
-function partnerApp(){return HS.get("hs_partner",null)}
-function byKm(a,b){return a.km-b.km}
-function toast(m){var t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove("on")},2800)}
-function modal(h){$("#modalBody").innerHTML=h;$("#modal").classList.add("on");sync()}
-function closeModal(){$("#modal").classList.remove("on");$("#modalBody").innerHTML="";sync()}
-$("#modal").onclick=function(e){if(e.target===$("#modal"))closeModal()};
-var PILL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="9" width="18" height="6" rx="3" transform="rotate(-35 12 12)"/><path d="m9 9 6 6"/></svg>';
-
-/* ---------- shop ---------- */
-function stock(){return HS.stock(S.pharm)}
-function pharm(){return HS.listing(S.pharm)||HS.listings("pharm")[0]}
-function cartItems(){var st=stock();return Object.keys(S.cart).map(function(id){var d=st.filter(function(x){return String(x.id)===String(id)})[0];return d?{d:d,n:S.cart[id]}:null}).filter(Boolean)}
-function cartSub(){return cartItems().reduce(function(a,i){return a+i.d.p*i.n},0)}
-function cartCount(){return cartItems().reduce(function(a,i){return a+i.n},0)}
-function needsRx(){return cartItems().some(function(i){return i.d.rx})}
-function fee(){return 500+Math.round(pharm().km*150)}
-function renderShop(){
-  var p=pharm(),fav=PRO&&PRO.favP,st=stock().filter(function(d){return d.on!==0});
-  var ps=HS.listings("pharm").sort(function(a,b){return (b.id===fav)-(a.id===fav)||byKm(a,b)});
-  var cats=["All"].concat(st.map(function(d){return d.c}).filter(function(c,i,a){return a.indexOf(c)===i}));
-  var list=st.filter(function(d){return (S.cat==="All"||d.c===S.cat)&&(!S.q||d.n.toLowerCase().indexOf(S.q)>-1)});
-  $("#v-shop").innerHTML='<div class="banner"><div class="grow"><div class="s">Shopping from</div><h1>'+esc(p.name)+(p.id===fav?' <span class="tag">★ Favourite</span>':'')+(p.closed?' <span class="tag red">Closed now</span>':'')+'</h1><p>'+p.km+' km away · about '+p.eta+' min delivery · open '+esc(p.open)+'</p></div>'+
-    '<div><label class="s" for="phSel" style="display:block;margin-bottom:4px">Change pharmacy</label><select class="in" id="phSel" style="min-width:230px">'+ps.map(function(x){return '<option value="'+x.id+'"'+(x.id===S.pharm?' selected':'')+'>'+esc(x.name)+(x.id===fav?' ★':'')+(x.closed?' (closed)':'')+'</option>'}).join("")+'</select></div></div>'+
-    '<div class="row" style="margin-bottom:14px"><div class="search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="Search medicines" aria-label="Search medicines" value="'+esc(S.q)+'"></div>'+
-    '<label class="upload" style="flex:1;min-width:240px"><input type="file" id="rxFile" accept="image/*,.pdf">📄 '+(S.rx?'✔ '+esc(S.rx)+' attached':'Upload prescription')+'</label></div>'+
-    '<div class="chips" id="cats" style="margin-bottom:16px">'+cats.map(function(c){return '<button class="chip'+(c===S.cat?' on':'')+'" data-c="'+esc(c)+'">'+esc(c)+'</button>'}).join("")+'</div>'+
-    (list.length?'<div class="grid">'+list.map(function(d){
-      var n=S.cart[d.id]||0,out=d.q<=0;
-      return '<div class="prod"><div class="ph">'+PILL+'</div><div class="t">'+esc(d.n)+'</div><div class="s">'+esc(d.k)+'</div><div class="price">'+naira(d.p)+'</div><div>'+(out?'<span class="tag red">Out of stock</span>':d.rx?'<span class="tag rx">Prescription</span>':'<span class="tag">No prescription</span>')+(!out&&d.q<=10?' <span class="tag rx">'+d.q+' left</span>':'')+'</div>'+
-      (out?'':n?'<div class="qty"><button data-m="'+d.id+'" aria-label="Remove one">−</button><b>'+n+'</b><button data-p="'+d.id+'" aria-label="Add one"'+(n>=d.q?' disabled':'')+'>+</button></div>':'<button class="btn" data-p="'+d.id+'">Add to cart</button>')+'</div>'
-    }).join("")+'</div>':'<div class="empty">No medicine found. Try another name or upload your prescription.</div>');
-  $("#phSel").onchange=function(e){if(e.target.value!==S.pharm&&cartCount()){S.cart={};toast("Cart cleared. Prices and stock differ by pharmacy")}S.pharm=e.target.value;S.cat="All";renderShop();updateCart()};
-  $("#q").oninput=function(e){S.q=e.target.value.toLowerCase();var pos=e.target.selectionStart;renderShop();var q=$("#q");q.focus();q.setSelectionRange(pos,pos)};
-  $("#rxFile").onchange=function(e){var f=e.target.files[0];if(f){S.rx=f.name;toast("Prescription attached");renderShop()}};
-  document.querySelectorAll("#cats .chip").forEach(function(b){b.onclick=function(){S.cat=b.dataset.c;renderShop()}});
-  document.querySelectorAll("#v-shop [data-p]").forEach(function(b){b.onclick=function(){S.cart[b.dataset.p]=(S.cart[b.dataset.p]||0)+1;renderShop();updateCart()}});
-  document.querySelectorAll("#v-shop [data-m]").forEach(function(b){b.onclick=function(){var id=b.dataset.m;S.cart[id]--;if(S.cart[id]<=0)delete S.cart[id];renderShop();updateCart()}});
-}
-function updateCart(){var c=cartCount();$("#cartN").textContent=c;if($("#drawer").classList.contains("on"))renderCart()}
-function openCart(){renderCart();$("#drawer").classList.add("on");$("#ov").classList.add("on");sync();$("#drawer button").focus()}
-function closeCart(){$("#drawer").classList.remove("on");$("#ov").classList.remove("on");sync()}
-$("#cartBtn").onclick=openCart;$("#ov").onclick=closeCart;
-function renderCart(){
-  var items=cartItems(),p=pharm();
-  if(!items.length){$("#drawer").innerHTML='<div class="row"><h3 class="grow">Your cart</h3><button class="btn out sm" id="cx">Close</button></div><div class="empty">Your cart is empty.</div>';$("#cx").onclick=closeCart;return}
-  var sub=cartSub(),f=fee(),svc=Math.round(sub*0.05),tot=sub+f+svc,rx=needsRx();
-  $("#drawer").innerHTML='<div class="row"><h3 class="grow">Your cart</h3><button class="btn out sm" id="cx">Close</button></div><div class="s" style="margin:6px 0 12px">From <b>'+esc(p.name)+'</b></div>'+
-    items.map(function(i){return '<div class="card row" style="padding:12px"><div class="grow"><div class="t">'+esc(i.d.n)+'</div><div class="s">'+i.n+' × '+naira(i.d.p)+'</div></div><b>'+naira(i.n*i.d.p)+'</b></div>'}).join("")+
-    (rx?'<div class="card" style="background:#FFF8EC;border-color:#F0D9A8"><div class="t">Prescription required</div><div class="s">'+(S.rx?'✔ '+esc(S.rx)+' attached. The pharmacist will verify it.':'Close the cart and upload your prescription to continue.')+'</div></div>':'')+
-    '<div class="card"><div class="s">Deliver to</div><div class="t">'+esc(PRO.addr)+'</div></div>'+
-    '<div class="card sum"><div><span>Subtotal</span><span>'+naira(sub)+'</span></div><div><span>Delivery ('+p.km+' km)</span><span>'+naira(f)+'</span></div><div><span>Service fee</span><span>'+naira(svc)+'</span></div><div class="tot"><span>Total</span><span>'+naira(tot)+'</span></div></div>'+
-    '<button class="btn full" id="place"'+(rx&&!S.rx?' disabled':'')+'>Pay '+naira(tot)+'</button><div class="note">You pay first. The pharmacy gets your order once payment succeeds.</div>';
-  $("#cx").onclick=closeCart;
-  $("#place").onclick=function(){
-    if(p.closed){toast(p.name+" is closed right now. Choose another pharmacy");return}
-    var now=stock(),short=items.filter(function(i){var x=now.filter(function(s){return s.id===i.d.id})[0];return !x||x.q<i.n})[0];
-    if(short){toast("Not enough "+short.d.n+" in stock now");return}
-    HS.pay({amount:tot,title:"Order from "+p.name,email:PRO.email}).then(function(r){
-      if(!r)return;
-      HS.addOrder({kind:"order",pid:p.id,ph:p.name,cust:SESS.id,name:PRO.name,phone:SESS.id,addr:PRO.addr,items:items.map(function(i){return {n:i.d.n,q:i.n,p:i.d.p}}),
-        rx:rx?1:0,rxName:S.rx||"",sub:sub,fee:f,svc:svc,total:tot,st:"new",t:Date.now(),t2:Date.now(),otp:String(Math.floor(1000+Math.random()*9000)),paid:r,src:"web"});
-      S.cart={};S.rx=null;closeCart();updateCart();toast("Paid. Order sent to "+p.name);go("orders");
-    });
-  };
-}
-
-/* ---------- hospital: register, then pay for a consultation ---------- */
-function hosp(){return HS.listing(S.hosp)||HS.listings("hosp")[0]}
-function webTypes(h){return Object.keys(h.fees).filter(function(k){return HS.webOk(k)&&k!=="Registration"})}
-function renderHosp(){
-  var h=hosp(),fav=PRO&&PRO.favH,hn=(PRO.hn||{})[h.id],regFee=h.fees.Registration||0,types=webTypes(h),pros=HS.pros(h);
-  if(!S.ctype||types.indexOf(S.ctype)<0)S.ctype=types[0]||null;
-  var fee=S.ctype?h.fees[S.ctype]:0;
-  var others=HS.listings("hosp").filter(function(x){return x.id!==h.id}).sort(function(a,b){return (b.id===fav)-(a.id===fav)||byKm(a,b)});
-  $("#v-hosp").innerHTML='<div class="banner"><div class="grow"><div class="s">Your hospital</div><h1>'+esc(h.name)+(h.id===fav?' <span class="tag">★ Favourite</span>':'')+'</h1><p>'+h.km+' km · ★ '+esc(h.rating)+' · '+esc(h.type)+' · '+(h.open24?'Open 24/7':'Day hours')+'</p></div>'+
-    '<div class="row"><a class="btn out" href="tel:'+esc(h.phone||"")+'">📞 Call hospital</a>'+(h.id!==fav?'<button class="btn out" id="mkFav">★ Make favourite</button>':'')+'</div></div>'+
-    '<div class="two"><div>'+
-    '<div class="card"><div class="row"><h3 class="grow">1. Register as a patient</h3>'+(hn?'<span class="tag">✔ Registered</span>':'')+'</div>'+
-      (hn?'<div class="s" style="margin-top:8px">Your hospital number</div><div class="ticket" style="margin-top:6px"><b>'+esc(hn)+'</b></div><div class="s" style="margin-top:8px">Quote this number at '+esc(h.name)+'.</div>'
-         :'<div class="s" style="margin:6px 0 12px">New to '+esc(h.name)+'? Register once to get your hospital number. '+(regFee?'The hospital charges <b>'+naira(regFee)+'</b> for registration.':'The hospital has not set a registration fee, so registration is free.')+'</div><button class="btn" id="regBtn">'+(regFee?'Register and pay '+naira(regFee):'Register for free')+'</button>')+'</div>'+
-    '<div class="card"><h3>2. Pay for a consultation</h3>'+
-      (!types.length?'<div class="empty" style="padding:20px">This hospital has not set consultation fees for the website yet.</div>':
-      '<div class="s" style="margin:6px 0 10px">Pay online, then show your ticket at reception. You will not pay again at the desk.</div>'+
-      '<div class="s" style="font-weight:700;color:var(--ink);margin-bottom:6px">Consultation type</div><div class="chips" id="ct" style="margin-bottom:14px">'+types.map(function(k){return '<button class="chip'+(k===S.ctype?' on':'')+'" data-k="'+esc(k)+'">'+esc(HS.label(k))+' · '+naira(h.fees[k])+'</button>'}).join("")+'</div>'+
-      '<div class="gf"><label for="cd">Doctor</label><select id="cd"><option value="">Any available doctor</option>'+pros.map(function(d){return '<option'+(d===S.cdoc?' selected':'')+'>'+esc(d)+'</option>'}).join("")+'</select></div>'+
-      '<div class="gf"><label for="cr">Reason for visit (optional)</label><textarea id="cr" rows="2" maxlength="200" placeholder="e.g. Persistent headache for 3 days">'+esc(S.reason)+'</textarea></div>'+
-      '<button class="btn full" id="payCons"'+(hn?'':' disabled')+'>Pay '+naira(fee)+' and get my ticket</button>'+(hn?'':'<div class="s" style="margin-top:8px;text-align:center">Register first to unlock payment.</div>'))+'</div>'+
-    '</div><div>'+
-    '<div class="card"><h3>Fees set by '+esc(h.name)+'</h3><div class="feelist" style="margin-top:8px">'+Object.keys(h.fees).filter(function(k){return !HS.isLive(k)&&k!=="Emergency"}).map(function(k){return '<div><span>'+esc(HS.label(k))+'</span><b>'+naira(h.fees[k])+'</b></div>'}).join("")+'</div></div>'+
-    '<div class="notice"><div style="font-size:30px">📱</div><div><b>Need a video or voice consultation?</b><span class="s">Live video and voice calls and appointment booking are available in the Hospiswift app.</span></div></div>'+
-    '<h2>Other hospitals</h2>'+others.map(function(x){return '<div class="card row" style="padding:14px"><div class="grow"><div class="t">'+esc(x.name)+(x.id===fav?' <span class="tag">★</span>':'')+'</div><div class="s">'+x.km+' km · '+esc(x.type)+'</div></div><button class="btn out sm" data-h="'+x.id+'">View</button></div>'}).join("")+
-    '</div></div>';
-  if($("#mkFav"))$("#mkFav").onclick=function(){PRO.favH=h.id;HS.saveProfile(SESS.id,PRO);toast(h.name+" is now your favourite");renderHosp()};
-  document.querySelectorAll("#v-hosp [data-h]").forEach(function(b){b.onclick=function(){S.hosp=b.dataset.h;S.ctype=null;S.cdoc="";renderHosp();scrollTo(0,0)}});
-  if($("#ct"))document.querySelectorAll("#ct .chip").forEach(function(b){b.onclick=function(){S.ctype=b.dataset.k;S.cdoc=$("#cd").value;S.reason=$("#cr").value;renderHosp()}});
-  if($("#regBtn"))$("#regBtn").onclick=function(){openRegister(h,regFee)};
-  if($("#payCons"))$("#payCons").onclick=function(){
-    S.cdoc=$("#cd").value;S.reason=$("#cr").value.trim();
-    var amount=HS.fees(h.id)[S.ctype];
-    if(amount!==fee){toast("The fee changed to "+naira(amount)+". Check and pay again");renderHosp();return}
-    HS.pay({amount:amount,title:HS.label(S.ctype)+" · "+h.name,email:PRO.email}).then(function(r){
-      if(!r)return;
-      HS.addVisit({kind:"ticket",pid:h.id,cust:SESS.id,pat:PRO.name,phone:SESS.id,hn:hn,doc:S.cdoc,mode:S.ctype,slot:null,fee:amount,st:"confirmed",paid:r,src:"web",reason:S.reason,t:Date.now()});
-      S.reason="";S.cdoc="";toast("Paid. Your ticket is ready");go("orders");
-    });
-  };
-}
-function openRegister(h,regFee){
-  modal('<h3>Register at '+esc(h.name)+'</h3><p class="s" style="margin:4px 0 14px">These details go on your patient file.</p>'+
-    '<div class="gf"><label for="rD">Date of birth</label><input id="rD" type="date" max="'+new Date().toISOString().slice(0,10)+'"></div>'+
-    '<div class="gf"><label for="rG">Gender</label><select id="rG"><option value="">Select</option><option>Female</option><option>Male</option><option>Prefer not to say</option></select></div>'+
-    '<div class="gf"><label for="rK">Next of kin name</label><input id="rK" autocomplete="off"></div><div class="gf"><label for="rP">Next of kin phone</label><input id="rP" type="tel" autocomplete="off" placeholder="0803 123 4567"></div>'+
-    '<div class="gmsg" id="rErr" role="alert" hidden></div><div class="row"><button class="btn out" style="flex:1" id="rC">Cancel</button><button class="btn" style="flex:2" id="rGo">'+(regFee?'Pay '+naira(regFee)+' and register':'Register')+'</button></div>');
-  $("#rC").onclick=closeModal;
-  $("#rGo").onclick=function(){
-    var d=$("#rD").value,g=$("#rG").value,k=$("#rK").value.trim(),ph=$("#rP").value.replace(/[\s-]/g,""),e=$("#rErr");
-    var err=!d?"Enter your date of birth.":!g?"Select your gender.":k.length<2?"Enter your next of kin's name.":!/^(\+234|0)\d{10}$/.test(ph)?"Enter a Nigerian phone number for your next of kin.":"";
-    if(err){e.textContent=err;e.hidden=false;return}
-    var fee=HS.fees(h.id).Registration||0;
-    var done=function(r){
-      var hn=HS.hospitalNo(h);PRO.hn=PRO.hn||{};PRO.hn[h.id]=hn;HS.saveProfile(SESS.id,PRO);
-      HS.addVisit({kind:"reg",pid:h.id,cust:SESS.id,pat:PRO.name,phone:SESS.id,hn:hn,doc:"",mode:"Registration",slot:null,fee:fee,st:"completed",paid:r,src:"web",reg:{dob:d,gender:g,nok:k,nokPhone:ph},t:Date.now()});
-      closeModal();toast("Registered. Your hospital number is "+hn);renderHosp();renderOrdersBadge();
-    };
-    if(!fee)return done(null);
-    modalPay(h,fee,done);
-  };
-}
-function modalPay(h,fee,done){closeModalKeep();HS.pay({amount:fee,title:"Registration · "+h.name,email:PRO.email}).then(function(r){if(r)done(r);else renderHosp()})}
-function closeModalKeep(){$("#modal").classList.remove("on");$("#modalBody").innerHTML="";sync()}
-
-/* ---------- orders and tickets ---------- */
-var VST={confirmed:["Confirmed","tag"],inprogress:["With doctor","tag rx"],completed:["Completed","tag gr"],noshow:["Missed","tag red"]};
-function renderOrders(){
-  var os=HS.orders(function(o){return o.cust===SESS.id}),vs=HS.visits(function(v){return v.cust===SESS.id});
-  var all=os.map(function(o){return {t:o.t,o:o}}).concat(vs.map(function(v){return {t:v.t,v:v}})).sort(function(a,b){return b.t-a.t});
-  $("#v-orders").innerHTML='<h1 style="margin-bottom:14px">My orders</h1>'+(all.length?all.map(function(x){
-    if(x.v){
-      var v=x.v,l=HS.listing(v.pid),s=VST[v.st]||VST.confirmed,live=HS.isLive(v.mode);
-      var title=v.kind==="reg"?"Registration":v.kind==="ticket"?HS.label(v.mode)+" ticket":HS.label(v.mode);
-      return '<div class="card"><div class="row"><div class="grow"><div class="t" style="color:var(--blue)">'+esc(title)+' · '+esc(v.id)+'</div><div class="s">'+esc(l?l.name:"")+'</div></div><span class="'+s[1]+'">'+s[0]+'</span></div>'+
-        '<div class="s" style="margin-top:8px">'+(v.doc?esc(v.doc)+' · ':'')+'Paid '+naira(v.fee)+(v.paid?' · Ref '+esc(v.paid.ref):'')+'</div>'+
-        (v.kind==="reg"?'<div class="ticket"><span class="s">Hospital number</span><b>'+esc(v.hn)+'</b></div>':
-         v.kind==="ticket"&&(v.st==="confirmed"||v.st==="inprogress")?'<div class="ticket"><span class="s">Show this ticket and your hospital number '+esc(v.hn||"")+' at reception</span><b>'+esc(v.id)+'</b></div>':
-         live&&(v.st==="confirmed"||v.st==="inprogress")?'<div class="notice" style="margin-top:10px"><div style="font-size:26px">📱</div><div class="s">Booked in the app. Join this '+esc(v.mode.toLowerCase())+' consultation from the Hospiswift app.</div></div>':'')+'</div>';
-    }
-    var o=x.o,i=OSEQ.indexOf(o.st),done=o.st==="done";
-    if(o.st==="rejected")return '<div class="card"><div class="row"><div class="grow"><div class="t">Order '+esc(o.id)+'</div><div class="s">'+esc(o.ph)+'</div></div><span class="tag red">Declined</span></div><div class="s" style="margin-top:8px">The pharmacy could not fill this order. Your payment of '+naira(o.total)+' will be refunded.</div></div>';
-    return '<div class="card"><div class="row"><div class="grow"><div class="t">Order '+esc(o.id)+'</div><div class="s">'+esc(o.ph)+'</div></div><b>'+naira(o.total)+'</b></div>'+
-      '<div class="s" style="margin-top:6px">'+o.items.map(function(it){return it.q+"× "+esc(it.n)}).join(", ")+'</div>'+
-      '<ul class="steps">'+STAGES.map(function(s,k){return '<li class="'+(k<i?'done':k===i?(done?'done':'now'):'')+'">'+s+(k===2&&i>=2&&o.rider?' – '+esc(o.rider):'')+'</li>'}).join("")+'</ul>'+
-      (i>=3&&!done?'<div class="s" style="margin-bottom:4px">Give this code to the rider on delivery</div><div class="otp">'+esc(o.otp)+'</div>':'')+'</div>';
-  }).join(""):'<div class="empty">Nothing yet. Order medicine or register and pay for a consultation to see it here.</div>');
-}
-function renderOrdersBadge(){}
-setInterval(function(){
-  if(!SESS||SESS.role!=="customer")return;
-  var moved=false;
-  HS.orders(function(o){return o.cust===SESS.id&&o.st!=="done"&&o.st!=="rejected"&&!HS.alive(o.pid)}).forEach(function(o){
-    if(Date.now()-(o.t2||o.t)<5000)return;
-    var n=OSEQ[OSEQ.indexOf(o.st)+1],patch={st:n,t2:Date.now()};if(n==="ready")patch.rider=RIDERS[Math.floor(Math.random()*4)];
-    HS.setOrder(o.id,patch);moved=true;if(n==="done")toast("Order "+o.id+" delivered");
-  });
-  if(moved&&S.view==="orders")renderOrders();
-},1500);
-HS.onChange(function(){if(SESS&&SESS.role==="customer"&&S.view==="orders")renderOrders()});
-
-/* ---------- account ---------- */
-function favSelects(p){
-  var ph=HS.listings("pharm").sort(byKm),ho=HS.listings("hosp").sort(byKm);
-  return '<div class="gf"><label for="fP">Favourite pharmacy</label><select id="fP">'+ph.map(function(x){return '<option value="'+x.id+'"'+(x.id===(p&&p.favP)?' selected':'')+'>'+esc(x.name)+'</option>'}).join("")+'</select></div>'+
-    '<div class="gf"><label for="fH">Favourite hospital</label><select id="fH">'+ho.map(function(x){return '<option value="'+x.id+'"'+(x.id===(p&&p.favH)?' selected':'')+'>'+esc(x.name)+'</option>'}).join("")+'</select></div>';
-}
-function renderAcct(){
-  var hns=Object.keys(PRO.hn||{});
-  $("#v-acct").innerHTML='<h1 style="margin-bottom:14px">Account</h1><div class="two"><div><div class="card"><div class="t">'+(SESS.demo?"Demo customer account":"Your profile")+'</div><div class="s" style="margin-bottom:12px">'+esc(SESS.id)+'</div>'+
-    '<div class="gf"><label for="aN">Full name</label><input id="aN" value="'+esc(PRO.name)+'"></div><div class="gf"><label for="aA">Delivery address</label><input id="aA" value="'+esc(PRO.addr)+'"></div>'+favSelects(PRO)+
-    '<div class="gmsg" id="aErr" role="alert" hidden></div><button class="btn" id="aSave">Save changes</button></div></div><div>'+
-    '<div class="card"><div class="t">Hospital numbers</div>'+(hns.length?hns.map(function(id){var l=HS.listing(id);return '<div class="row" style="justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)"><span>'+esc(l?l.name:id)+'</span><b>'+esc(PRO.hn[id])+'</b></div>'}).join(""):'<div class="s" style="margin-top:6px">You have not registered at a hospital yet.</div>')+'</div>'+
-    '<div class="card"><div class="t">Own a pharmacy or hospital?</div><div class="s" style="margin:4px 0 12px">List your business to receive orders and consultation payments.</div><div class="row"><button class="btn out" id="aPh">Apply as a pharmacy</button><button class="btn out" id="aHo">Apply as a hospital</button></div></div>'+
-    '<button class="btn red full" id="aOut">Sign out</button></div></div>';
-  $("#aSave").onclick=function(){
-    var n=$("#aN").value.trim(),a=$("#aA").value.trim();
-    if(!n||!a){var e=$("#aErr");e.textContent="Enter your name and delivery address.";e.hidden=false;return}
-    var chP=PRO.favP!==$("#fP").value,chH=PRO.favH!==$("#fH").value;
-    PRO.name=n;PRO.addr=a;PRO.favP=$("#fP").value;PRO.favH=$("#fH").value;HS.saveProfile(SESS.id,PRO);
-    if(chP){S.cart={};S.pharm=PRO.favP;updateCart()}if(chH)S.hosp=PRO.favH;toast("Saved");renderAcct();
-  };
-  $("#aPh").onclick=function(){openFrame("apply",null,"pharm")};
-  $("#aHo").onclick=function(){openFrame("apply",null,"hosp")};
-  $("#aOut").onclick=signOut;
-}
-
-/* ---------- navigation ---------- */
-function go(v){
-  S.view=v;
-  document.querySelectorAll(".view").forEach(function(e){e.classList.toggle("on",e.id==="v-"+v)});
-  document.querySelectorAll("#links button").forEach(function(b){b.classList.toggle("on",b.dataset.v===v)});
-  document.body.classList.toggle("hosp",v==="hosp");
-  document.querySelector('meta[name="theme-color"]').content=v==="hosp"?"#1565C0":"#0B7A55";
-  if(v==="shop")renderShop();else if(v==="hosp")renderHosp();else if(v==="orders")renderOrders();else renderAcct();
-  scrollTo(0,0);
-}
-document.querySelectorAll("#links button").forEach(function(b){b.onclick=function(){go(b.dataset.v)}});
-document.addEventListener("keydown",function(e){if(e.key==="Escape"){if($("#drawer").classList.contains("on"))closeCart();else if($("#modal").classList.contains("on"))closeModal()}});
-
-/* ---------- sign in: customer, pharmacy, hospital ---------- */
-function sync(){
-  var g=!$("#gate").hidden,f=$("#pframe").classList.contains("on"),o=g||f;
-  ["#bar","#main"].forEach(function(s){$(s).inert=o});
-  $("#gate").inert=f;
-}
-function openFrame(mode,demo,type){FR.mode=mode;$("#pf").src="partners.html?embed="+mode+"&web=1"+(demo?"&demo="+demo:"")+(type?"&type="+type:"");$("#pframe").classList.add("on");sync()}
-function closeFrame(){$("#pframe").classList.remove("on");$("#pf").src="about:blank";sync()}
-window.addEventListener("message",function(e){
-  var w=$("#pf").contentWindow;
-  if(!w||e.source!==w||!e.data||e.data.hs!=="partner-exit")return;
-  if(FR.mode==="portal")signOut();else closeFrame();
-});
-var ROLES={cus:{k:"customer",sub:"Shop from your favourite pharmacy and pay for hospital consultations online.",id:"Phone number",ph:"0803 123 4567",type:"tel"},
-  pharm:{k:"pharm",sub:"Manage orders, stock and fees for your pharmacy.",id:"Pharmacy email",ph:"you@pharmacy.com",type:"email",apply:"Apply as a pharmacy"},
-  hosp:{k:"hosp",sub:"Manage visits, registrations, doctors and fees for your hospital or clinic.",id:"Hospital email",ph:"you@hospital.com",type:"email",apply:"Apply as a hospital or clinic"}};
-function showGate(role,step){G={role:role||"cus",step:step||0,id:"",code:""};$("#gate").hidden=false;sync();drawGate()}
-function gerr(m){var e=$("#gErr");if(e){e.textContent=m;e.hidden=false}}
-function drawGate(){
-  var R=ROLES[G.role],cus=G.role==="cus";
-  document.body.classList.toggle("hosp",G.role==="hosp");
-  [["tCus","cus"],["tPh","pharm"],["tHo","hosp"]].forEach(function(t){$("#"+t[0]).setAttribute("aria-selected",G.role===t[1]?"true":"false")});
-  $("#gTabs").style.display=G.step===2?"none":"";
-  $("#gSub").textContent=G.step===2?"Tell us a little about you and choose your favourites.":R.sub;
-  var h="";
-  if(G.step===0){
-    h+='<div class="gf"><label for="gId">'+R.id+'</label><input id="gId" type="'+R.type+'" inputmode="'+R.type+'" autocomplete="'+R.type+'" placeholder="'+R.ph+'" value="'+esc(G.id)+'"><div class="gmsg" id="gErr" role="alert" hidden></div></div><button class="btn full" id="gSend">Send code</button>';
-    if(!cus)h+='<div class="or">New to Hospiswift?</div><button class="btn out full" id="gApply">'+R.apply+'</button>';
-    if(DEMO_ACCOUNTS)h+='<div class="or">Just exploring? Try a demo account</div><div class="demos"><button data-demo="customer"><span>👤</span>Customer</button><button data-demo="pharm"><span>💊</span>Pharmacy</button><button data-demo="hosp"><span>🏥</span>Hospital</button></div>';
-  }else if(G.step===1){
-    h+='<div class="gf"><label for="gCode">Enter the 4-digit code sent to '+esc(G.id)+'</label><input id="gCode" class="code" inputmode="numeric" maxlength="4" autocomplete="one-time-code" placeholder="····"><div class="gmsg" id="gErr" role="alert" hidden></div></div>'+
-       '<div class="demo">Demo code: <b>'+G.code+'</b><br>A live site sends this by '+(cus?"SMS":"email")+'.</div>'+
-       '<button class="btn full" id="gVerify">Sign in</button><button class="btn out full" id="gBack" style="margin-top:8px">Use a different '+(cus?"number":"email")+'</button>';
-  }else{
-    h+='<div class="gf"><label for="rN">Full name</label><input id="rN" autocomplete="name"></div><div class="gf"><label for="rA">Delivery address</label><input id="rA" autocomplete="street-address" placeholder="House number, street, area"></div>'+
-       favSelects({favP:"p1",favH:"h1"})+'<div class="gmsg" id="gErr" role="alert" hidden></div><button class="btn full" id="rGo">Create my account</button><button class="btn out full" id="rOut" style="margin-top:8px">Sign out</button>';
-  }
-  $("#gForm").innerHTML=h;
-  var send=$("#gSend");if(send){send.onclick=sendCode;$("#gId").onkeydown=function(e){if(e.key==="Enter")sendCode()}}
-  var vf=$("#gVerify");if(vf){vf.onclick=verify;$("#gCode").onkeydown=function(e){if(e.key==="Enter")verify()};$("#gBack").onclick=function(){G.step=0;drawGate()};$("#gCode").focus()}
-  var ap=$("#gApply");if(ap)ap.onclick=function(){openFrame("apply",null,R.k)};
-  document.querySelectorAll("[data-demo]").forEach(function(b){b.onclick=function(){startDemo(b.dataset.demo)}});
-  var rg=$("#rGo");if(rg){rg.onclick=register;$("#rOut").onclick=signOut}
-}
-[["tCus","cus"],["tPh","pharm"],["tHo","hosp"]].forEach(function(t){$("#"+t[0]).onclick=function(){G={role:t[1],step:0,id:"",code:""};drawGate()}});
-function sendCode(){
-  var v=$("#gId").value.trim(),cus=G.role==="cus",n=v.replace(/[\s-]/g,"");
-  if(cus){if(!/^(\+234|0)\d{10}$/.test(n))return gerr("Enter a Nigerian number, e.g. 0803 123 4567.")}
-  else{
-    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v))return gerr("Enter a valid email.");
-    var a=partnerApp();
-    if(!(a&&a.ref&&a.type===G.role&&a.d&&String(a.d.email||"").trim().toLowerCase()===v.toLowerCase()))return gerr("No "+(G.role==="pharm"?"pharmacy":"hospital")+" application found for this email on this device. Apply below.");
-  }
-  G.id=cus?n:v;G.step=1;G.code=String(Math.floor(1000+Math.random()*9000));drawGate();
-}
-function verify(){
-  if($("#gCode").value.trim()!==G.code)return gerr("That code is not right. Use the demo code shown below.");
-  SESS=G.role==="cus"?{role:"customer",id:G.id}:{role:"partner",kind:G.role,id:G.id};saveSess();$("#gate").hidden=true;enter();
-}
-function register(){
-  var n=$("#rN").value.trim(),a=$("#rA").value.trim();
-  if(!n)return gerr("Enter your full name.");if(a.length<6)return gerr("Enter your delivery address.");
-  HS.saveProfile(SESS.id,{name:n,addr:a,favP:$("#gForm #fP").value,favH:$("#gForm #fH").value,hn:{}});enter();toast("Welcome, "+n.split(" ")[0]);
-}
-function startDemo(k){
-  if(k==="customer"){
-    SESS={role:"customer",id:"08000000000",demo:"customer"};
-    if(!HS.profile(SESS.id))HS.saveProfile(SESS.id,{name:"Demo Customer",addr:"14 Opebi Road, Ikeja, Lagos",favP:"p1",favH:"h1",hn:{}});
-  }else SESS={role:"partner",kind:k,id:k==="pharm"?"Demo pharmacy":"Demo hospital",demo:k};
-  saveSess();$("#gate").hidden=true;enter();if(k==="customer")toast("Demo account. Nothing here is real");
-}
-function enter(){
-  if(!SESS){showGate();return}
-  if(SESS.role==="partner"){$("#gate").hidden=true;openFrame("portal",SESS.demo,SESS.kind);return}
-  PRO=HS.profile(SESS.id);
-  if(!PRO){showGate("cus",2);return}
-  $("#gate").hidden=true;closeFrame();
-  if(!S.pharm||!HS.listing(S.pharm))S.pharm=PRO.favP;
-  if(!S.hosp||!HS.listing(S.hosp))S.hosp=PRO.favH;
-  updateCart();go("shop");
-}
-function signOut(){
-  SESS=null;PRO=null;saveSess();S.cart={};S.pharm=null;S.hosp=null;S.rx=null;S.ctype=null;$("#v-acct").innerHTML="";closeCart();closeModal();closeFrame();updateCart();showGate("cus");toast("Signed out");
-}
-enter();
+(function(){"use strict";
+var $=function(s){return document.querySelector(s)},esc=function(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
+var FALL=[{id:"p1",kind:"pharm",name:"HealthPlus Pharmacy",km:1.2,eta:25,rating:4.8,open:"24 hrs"},{id:"p2",kind:"pharm",name:"MedPoint Pharmacy",km:2.4,eta:35,rating:4.6,open:"8am – 10pm"},{id:"h1",kind:"hosp",name:"Lagoon General Hospital",km:1.8,type:"General",open24:true,rating:4.6},{id:"h2",kind:"hosp",name:"St. Mary Specialist Hospital",km:3.2,type:"Specialist",open24:true,rating:4.7}];
+function all(){try{return window.HS.listings("pharm").concat(window.HS.listings("hosp"))}catch(e){return FALL}}
+var F="all",Q="",mode="pharm";
+function is24(x){return x.kind==="hosp"?!!x.open24:/24/.test(x.open||"")}
+function card(x){var h=x.kind==="hosp";
+ return '<article class="pc'+(h?' h':'')+'"><h3>'+esc(x.name)+'</h3><div class="meta"><span>★ '+esc(x.rating)+'</span><span>'+esc(x.km)+' km</span>'+(h?'<span>'+esc(x.type)+'</span>':'<span>~'+esc(x.eta)+' min delivery</span>')+'</div><div><span class="tag'+(is24(x)?' on':'')+'">'+(is24(x)?'Open 24 hours':esc(x.open||'Hours on request'))+'</span></div><div class="go"><a class="btn sm '+(h?'b':'g')+'" href="app.html">'+(h?'View visit fees':'Order medicine')+'</a>'+(x.phone?'<a class="btn sm o" href="tel:'+esc(x.phone)+'">Call</a>':'')+'</div></article>'}
+function draw(){var l=all().filter(function(x){return(F==="all"||(F==="24"?is24(x):x.kind===F))&&(!Q||x.name.toLowerCase().indexOf(Q)>-1)}).sort(function(a,b){return a.km-b.km});
+ $("#cards").innerHTML=l.length?l.map(card).join(""):'<p class="empty">No partner matches that search. Clear the search or pick a different filter.</p>'}
+document.querySelectorAll(".chip").forEach(function(b){b.onclick=function(){F=b.dataset.f;document.querySelectorAll(".chip").forEach(function(c){c.setAttribute("aria-pressed",c===b)});draw()}});
+function setMode(m){mode=m;$("#tabP").setAttribute("aria-selected",m==="pharm");$("#tabH").setAttribute("aria-selected",m==="hosp");$("#q").placeholder=m==="pharm"?"Search a pharmacy, e.g. HealthPlus":"Search a hospital, e.g. Lagoon General";$("#fgo").className="btn "+(m==="pharm"?"g":"b")}
+$("#tabP").onclick=function(){setMode("pharm")};$("#tabH").onclick=function(){setMode("hosp")};
+$("#finder").onsubmit=function(e){e.preventDefault();Q=$("#q").value.trim().toLowerCase();F=mode;document.querySelectorAll(".chip").forEach(function(c){c.setAttribute("aria-pressed",c.dataset.f===F)});draw();$("#directory").scrollIntoView({behavior:"smooth"})};
+draw();
 })();
 </script>
 </body>
