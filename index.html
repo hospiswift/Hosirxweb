@@ -178,12 +178,12 @@ footer a{display:block;text-decoration:none;padding:3px 0}footer a:hover{color:#
 <main id="main">
 <section class="hero" aria-roledescription="carousel" aria-label="Hosirx highlights">
   <div class="slides" id="slides" aria-live="off">
-    <div class="slide h on" data-photo="assets/hero-hospital.jpg" style="--photo:url(assets/hero-hospital.jpg)"><div class="wrap"><div><span class="emb hmark" role="img" aria-label="Hosirx logo"></span><h1>Care from your hospital, without the queue</h1><p class="lead">Find a hospital, see its fees up front, register as a new patient and pay online.</p><div class="ctas"><a class="btn g" href="#directory">Find a hospital</a><button class="btn o" data-signup="customer">Sign up free</button></div></div><div class="art" data-scene="hospital" role="img" aria-label="A doctor in a white coat speaking with a patient"></div></div></div>
-    <div class="slide p" data-photo="assets/hero-pharmacy.jpg" style="--photo:url(assets/hero-pharmacy.jpg)"><div class="wrap"><div><span class="emb hmark" aria-hidden="true"></span><h2>Medicine from a pharmacy you trust</h2><p class="lead">Compare nearby pharmacies, upload a prescription and order what you need.</p><div class="ctas"><a class="btn g" href="app.html">Shop medicine</a><button class="btn o" data-signup="customer">Sign up free</button></div></div><div class="art" data-scene="pharmacy" role="img" aria-label="A pharmacist handing medicine to a customer"></div></div></div>
-    <div class="slide d" data-photo="assets/hero-shop.jpg" style="--photo:url(assets/hero-shop.jpg)"><div class="wrap"><div><span class="emb hmark" aria-hidden="true"></span><h2>Browse the shelf from your phone</h2><p class="lead">See what each pharmacy stocks, add it to your cart and get it delivered.</p><div class="ctas"><button class="btn g" data-signup="customer">Start ordering</button><button class="btn o" data-signup="partner">List your business</button></div></div><div class="art" data-scene="delivery" role="img" aria-label="Shelves of medicine in a pharmacy"></div></div></div>
+    <div class="slide h on photo" data-photo="assets/hero-hospital.jpg" style="--photo:url(assets/hero-hospital.jpg)"><div class="wrap"><div><span class="emb hmark" role="img" aria-label="Hosirx logo"></span><h1>Care from your hospital, without the queue</h1><p class="lead">Find a hospital, see its fees up front, register as a new patient and pay online.</p><div class="ctas"><a class="btn g" href="#directory">Find a hospital</a><button class="btn o" data-signup="customer">Sign up free</button></div></div></div></div>
+    <div class="slide p photo" data-photo="assets/hero-pharmacy.jpg" style="--photo:url(assets/hero-pharmacy.jpg)"><div class="wrap"><div><span class="emb hmark" aria-hidden="true"></span><h2>Medicine from a pharmacy you trust</h2><p class="lead">Compare nearby pharmacies, upload a prescription and order what you need.</p><div class="ctas"><a class="btn g" href="app.html">Shop medicine</a><button class="btn o" data-signup="customer">Sign up free</button></div></div></div></div>
+    <div class="slide d photo" data-photo="assets/hero-shop.jpg" style="--photo:url(assets/hero-shop.jpg)"><div class="wrap"><div><span class="emb hmark" aria-hidden="true"></span><h2>Browse the shelf from your phone</h2><p class="lead">See what each pharmacy stocks, add it to your cart and get it delivered.</p><div class="ctas"><button class="btn g" data-signup="customer">Start ordering</button><button class="btn o" data-signup="partner">List your business</button></div></div></div></div>
   </div>
   <div class="under"><video autoplay muted loop playsinline preload="auto" poster="assets/dna-poster.jpg" aria-hidden="true" tabindex="-1"><source src="assets/dna-loop.mp4" type="video/mp4"></video>
-  <div class="ctl"><button class="ar" id="prev" aria-label="Previous slide">‹</button><div class="dots" id="dots"></div><button class="ar" id="next" aria-label="Next slide">›</button></div>
+  <div class="ctl"><div class="dots" id="dots"></div></div>
   <div class="fwrap"><div class="finder">
     <div class="tabs" role="tablist" aria-label="What are you looking for"><button role="tab" id="tabP" aria-selected="true">Medicine</button><button role="tab" id="tabH" aria-selected="false">Hospital</button></div>
     <form class="frow" id="finder" role="search"><input id="q" type="search" placeholder="Search a pharmacy, e.g. HealthPlus" aria-label="Search"><button class="btn g" id="fgo" type="submit">Search</button></form>
@@ -275,30 +275,12 @@ $("#cards").addEventListener("click",function(e){var c=e.target.closest(".pc");i
 document.querySelectorAll("[data-signup]").forEach(function(b){b.onclick=function(e){e.preventDefault();openSU(b.dataset.signup)}});
 $("#sC").onclick=function(){tab(false)};$("#sP").onclick=function(){tab(true)};$("#mx").onclick=closeSU;
 mo.onclick=function(e){if(e.target===mo)closeSU()};document.addEventListener("keydown",function(e){if(e.key==="Escape")closeSU()});
-/* illustrated people */
-var SK={a:"#8D5A3B",b:"#5B3A29",c:"#C68E63",d:"#E2B48C"};
-function P(x,o){var h=o.hair==="afro"?'<circle cx="0" cy="-8" r="46" fill="#1F1A17"/>':o.hair==="long"?'<path d="M-43 -8Q-46 -52 0 -50Q46 -52 43 -8L46 56L-46 56Z" fill="#1F1A17"/>':"";
- var top=o.hair==="short"?'<path d="M-38 -2Q-42 -46 0 -44Q42 -46 38 -2Q20 -24 -38 -2Z" fill="#1F1A17"/>':o.hair==="helmet"?'<path d="M-40 -4Q-44 -50 0 -48Q44 -50 40 -4Z" fill="#1688FF"/><rect x="-42" y="-8" width="84" height="8" rx="4" fill="#0B63C9"/>':"";
- var acc={steth:'<path d="M-28 50Q-34 112 0 114Q34 112 28 50" fill="none" stroke="#2B2D31" stroke-width="5"/><circle cx="0" cy="118" r="9" fill="#8A8D94"/><path d="M-22 48L0 92L22 48" fill="none" stroke="#C9CDD2" stroke-width="3"/>',
- badge:'<rect x="30" y="92" width="30" height="30" rx="6" fill="#1FB339"/><path d="M42 98h6v6h6v6h-6v6h-6v-6h-6v-6h6z" fill="#fff"/>',
- bottle:'<rect x="46" y="96" width="34" height="56" rx="8" fill="#fff" stroke="#128A28" stroke-width="3"/><rect x="46" y="88" width="34" height="14" rx="4" fill="#128A28"/><path d="M60 114h6v6h6v6h-6v6h-6v-6h-6v-6h6z" fill="#1FB339"/>',
- bag:'<path d="M-62 110h52l-4 66h-44z" fill="#1FB339"/><path d="M-54 110q10-24 36 0" fill="none" stroke="#128A28" stroke-width="4"/><path d="M-44 130h6v6h6v6h-6v6h-6v-6h-6v-6h6z" fill="#fff"/>',
- box:'<rect x="-52" y="108" width="104" height="76" rx="8" fill="#D9A55B"/><rect x="-8" y="108" width="16" height="76" fill="#B8843D"/>',
- clip:'<rect x="-66" y="100" width="40" height="54" rx="5" fill="#fff" stroke="#8A8D94" stroke-width="3"/><path d="M-58 116h24M-58 128h24M-58 140h16" stroke="#1688FF" stroke-width="3"/>',none:""}[o.acc||"none"];
- return '<g transform="translate('+x+',215)">'+h+'<path d="M-74 200Q-74 52 0 46Q74 52 74 200Z" fill="'+o.top+'"/><rect x="-10" y="26" width="20" height="26" fill="'+o.skin+'"/><circle r="36" fill="'+o.skin+'"/>'+top+'<circle cx="-12" cy="-3" r="3.4" fill="#222"/><circle cx="12" cy="-3" r="3.4" fill="#222"/><path d="M-11 13Q0 24 11 13" fill="none" stroke="#222" stroke-width="3" stroke-linecap="round"/>'+acc+'</g>'}
-var SC={hospital:['#1688FF',P(150,{skin:SK.b,hair:"short",top:"#fff",acc:"steth"})+P(335,{skin:SK.a,hair:"long",top:"#8A8D94",acc:"clip"})],
- pharmacy:['#1FB339',P(150,{skin:SK.c,hair:"long",top:"#1FB339",acc:"bottle"})+P(335,{skin:SK.b,hair:"afro",top:"#1688FF",acc:"none"})],
- delivery:['#8A8D94',P(150,{skin:SK.a,hair:"helmet",top:"#1688FF",acc:"box"})+P(335,{skin:SK.d,hair:"short",top:"#3B3E44",acc:"none"})]};
-document.querySelectorAll("[data-scene]").forEach(function(el){var c=SC[el.dataset.scene];
- el.innerHTML='<svg viewBox="0 0 480 400" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><circle cx="380" cy="110" r="170" fill="#fff" opacity=".10"/><circle cx="70" cy="340" r="130" fill="#fff" opacity=".07"/><path d="M215 30h50v40h40v50h-40v40h-50v-40h-40V70h40z" fill="#fff" opacity=".10"/>'+c[1]+'</svg>'});
 /* slider */
 var sl=document.querySelectorAll(".slide"),cur=0,timer=null,dots=$("#dots");
 sl.forEach(function(_,i){var b=document.createElement("button");b.setAttribute("aria-label","Show slide "+(i+1));b.onclick=function(){show(i,true)};dots.appendChild(b)});
 function show(i,user){cur=(i+sl.length)%sl.length;sl.forEach(function(s,k){s.classList.toggle("on",k===cur);s.setAttribute("aria-hidden",k!==cur)});dots.querySelectorAll("button").forEach(function(b,k){b.setAttribute("aria-current",k===cur)});if(user)stop()}
 function stop(){clearInterval(timer);timer=null}
-$("#prev").onclick=function(){show(cur-1,true)};$("#next").onclick=function(){show(cur+1,true)};
 show(0);
-sl.forEach(function(sd){var im=new Image();im.onload=function(){sd.classList.add("photo")};im.src=sd.dataset.photo});
 if(!matchMedia("(prefers-reduced-motion:reduce)").matches){timer=setInterval(function(){show(cur+1)},6000);var hs=$(".hero");hs.onmouseenter=stop;hs.onfocusin=stop}
 })();
 </script>

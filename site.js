@@ -19,7 +19,7 @@
   }
 
   /* no footer inside the partner dashboard iframe or when a page opts out */
-  if (/[?&]embed=/.test(location.search) || document.documentElement.hasAttribute("data-no-footer")) { fill(); return; }
+  if (document.documentElement.hasAttribute("data-no-footer")) { fill(); return; }
 
   var css = ".hx-f{background:#25272B;color:#C9CBD0;padding:42px 0 26px;font:400 15px/1.55 Figtree,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;border-top:4px solid #1FB339}" +
     ".hx-f *{box-sizing:border-box}.hx-g{max-width:1160px;margin:0 auto;padding:0 22px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:26px}" +
@@ -38,7 +38,6 @@
   var f = document.createElement("footer");
   f.className = "hx-f";
   f.setAttribute("aria-label", "Site footer");
-  if (/partners\.html$/.test(location.pathname)) f.style.paddingBottom = "96px"; /* clear the dashboard's bottom bar */
   f.innerHTML =
     '<div class="hx-g">' +
       '<div><a class="hx-l" href="index.html" aria-label="Hosirx home"><i aria-hidden="true"></i><span><b>Hosi</b><em>rx</em></span></a>' +
@@ -49,6 +48,10 @@
       '<div><h4>Partners</h4><a href="index.html#partners">Join as a partner</a><a href="tel:112">Emergency: 112</a></div>' +
       '<div class="hx-b"><span>&copy; ' + new Date().getFullYear() + ' Hosirx. All rights reserved.</span><span>Hosirx does not replace medical advice. In an emergency call 112.</span></div>' +
     '</div>';
+  /* inside the sign-in overlay, open footer links in a new tab so the dashboard stays put */
+  if (window.parent !== window) [].forEach.call(f.querySelectorAll("a[href]"), function (a) {
+    if (!/^(mailto|tel):/.test(a.getAttribute("href"))) { a.target = "_blank"; a.rel = "noopener"; }
+  });
   document.body.appendChild(f);
   fill();
 })();
