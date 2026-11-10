@@ -461,7 +461,7 @@ function signOut(){
 }
 (function(){var q=new URLSearchParams(location.search),t=q.get("p")?{k:"p",id:q.get("p")}:q.get("h")?{k:"h",id:q.get("h")}:null;if(t){try{sessionStorage.setItem("hx_target",JSON.stringify(t))}catch(e){}}})();
 enter();
-(function(){var j=new URLSearchParams(location.search).get("join");if(!j||SESS)return;if(j==="pharm"||j==="hosp")openFrame("apply",null,j);else showGate("cus",0)})();
+(function(){var qs=new URLSearchParams(location.search),dm=qs.get("demo");if(dm==="pharm"||dm==="hosp"||dm==="customer"){startDemo(dm);return}var j=qs.get("join");if(!j||SESS)return;if(j==="pharm"||j==="hosp")openFrame("apply",null,j);else showGate("cus",0)})();
 })();
 </script>
 </body>

@@ -155,6 +155,10 @@ footer a{display:block;text-decoration:none;padding:3px 0}footer a:hover{color:#
 .under .fwrap{background:none;padding:10px 22px 44px}
 .under .finder{box-shadow:0 20px 60px #000a}
 @media(prefers-reduced-motion:reduce){.under video{display:none}}
+.opt a{display:block;text-decoration:none;color:var(--ink);border:2px solid var(--line);border-radius:14px;padding:14px;font-weight:700}
+.opt a small{display:block;font-weight:500;color:var(--mute)}
+.opt a.o1{border-color:var(--green);background:#E9F8EC}.opt a.o2{border-color:var(--blue);background:#E7F2FF}
+.opt a:hover{transform:translateY(-2px);box-shadow:0 6px 16px #0002}
 </style>
 </head>
 <body>
@@ -243,7 +247,9 @@ footer a{display:block;text-decoration:none;padding:3px 0}footer a:hover{color:#
   <h2 id="mt">Create your account</h2><p style="color:var(--mute)" id="ctx">Choose how you will use Hosirx.</p>
   <div class="seg" role="tablist" aria-label="Account type"><button role="tab" id="sC" aria-selected="true">Customer</button><button role="tab" id="sP" aria-selected="false">Partner</button></div>
   <div id="pC"><ul><li>Order medicine from nearby pharmacies</li><li>Register at hospitals and pay online</li><li>Track every order and visit</li></ul><a class="btn g" id="cGo" href="app.html?join=cus">Create customer account</a></div>
-  <div id="pP" hidden><div class="opt"><label><input type="radio" name="pt" value="pharm" checked>Pharmacy<small>Sell medicine, set prices</small></label><label><input type="radio" name="pt" value="hosp">Hospital<small>Set visit fees, take bookings</small></label></div><a class="btn g" id="pGo" href="app.html?join=pharm">Apply as a partner</a><p class="alt" style="margin-top:10px">Applications are reviewed before your listing goes live.</p></div>
+  <div id="pP" hidden><div class="opt"><a class="o1" href="app.html?demo=pharm"><b>Pharmacy</b><small>Open the demo dashboard</small></a><a class="o2" href="app.html?demo=hosp"><b>Hospital</b><small>Open the demo dashboard</small></a></div>
+  <p class="alt" style="margin:0 0 6px">Ready for a real listing? <a href="app.html?join=pharm">Apply as a pharmacy</a> or <a href="app.html?join=hosp">Apply as a hospital</a>. Applications are reviewed before your listing goes live.</p>
+  </div>
   <p class="alt">Already have an account? <a id="siGo" href="app.html?join=signin">Sign in</a></p>
 </div></div>
 <script src="hs-core.js"></script>
@@ -275,7 +281,6 @@ $("#cards").addEventListener("click",function(e){var c=e.target.closest(".pc");i
 document.querySelectorAll("[data-signup]").forEach(function(b){b.onclick=function(e){e.preventDefault();openSU(b.dataset.signup)}});
 $("#sC").onclick=function(){tab(false)};$("#sP").onclick=function(){tab(true)};$("#mx").onclick=closeSU;
 mo.onclick=function(e){if(e.target===mo)closeSU()};document.addEventListener("keydown",function(e){if(e.key==="Escape")closeSU()});
-document.querySelectorAll("[name=pt]").forEach(function(r){r.onchange=function(){$("#pGo").href="app.html?join="+r.value;$("#pGo").className="btn "+(r.value==="hosp"?"b":"g")}});
 /* illustrated people */
 var SK={a:"#8D5A3B",b:"#5B3A29",c:"#C68E63",d:"#E2B48C"};
 function P(x,o){var h=o.hair==="afro"?'<circle cx="0" cy="-8" r="46" fill="#1F1A17"/>':o.hair==="long"?'<path d="M-43 -8Q-46 -52 0 -50Q46 -52 43 -8L46 56L-46 56Z" fill="#1F1A17"/>':"";
