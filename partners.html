@@ -94,17 +94,42 @@ header h1,header h2,h1,h2,h3{font-family:Sora,Figtree,sans-serif}
 .emb{display:block;flex:none;width:40px;height:35px;background:var(--emb) center/contain no-repeat}
 .brand{display:flex;align-items:center;gap:8px;font-family:Sora,sans-serif;font-size:21px}
 .wm b{color:#1FB339}.wm i{color:#1688FF;font-style:normal}.brand .pt{font-weight:600;font-size:15px;color:#C9CBD0;font-family:Figtree,sans-serif;margin-left:2px}
+
+/* hamburger menu + embedded footer + toast position */
+header{position:relative}
+.tr{display:flex;align-items:center;gap:8px}
+.hb{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;border:1.5px solid rgba(255,255,255,.45)}
+.hb svg{width:22px;height:22px}.hb .x{display:none}.hb[aria-expanded=true] .x{display:inline}.hb[aria-expanded=true] .l{display:none}
+.pmenu{display:none;position:absolute;top:calc(100% - 8px);right:12px;width:min(280px,calc(100% - 24px));background:#25272B;border-bottom:4px solid #1FB339;border-radius:14px;padding:8px;box-shadow:0 18px 40px rgba(0,0,0,.35);z-index:60;flex-direction:column}
+.pmenu.open{display:flex}
+.pmenu a{display:block;color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:13px 14px;border-radius:10px}
+.pmenu a:hover,.pmenu a:focus-visible{background:rgba(255,255,255,.12)}
+.pmenu a+a{border-top:1px solid rgba(255,255,255,.12)}
+.pfoot{background:#25272B;color:#C9CBD0;border-top:4px solid #1FB339;border-radius:16px;padding:20px 18px;margin:18px 0 0;font-size:13px;line-height:1.55}
+.pfoot a{color:#fff;text-decoration:none;display:inline-block;padding:4px 0;margin-right:14px}
+.pfoot a:hover{text-decoration:underline}.pfoot p{margin-top:8px}
+.toast{top:auto;bottom:92px;transform:translateX(-50%) translateY(140px)}
+.toast.on{transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
 <header>
-  <div class="top"><div class="brand"><span class="emb" aria-hidden="true"></span><span class="wm"><b>Hosi</b><i>rx</i></span> <span class="pt">Partners</span></div><a class="back" href="app.html">Customer app</a></div>
+  <div class="top"><div class="brand"><span class="emb" aria-hidden="true"></span><span class="wm"><b>Hosi</b><i>rx</i></span> <span class="pt">Partners</span></div><div class="tr"><a class="back" href="app.html">Customer app</a><button class="hb" id="pmBtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="pMenu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path class="l" d="M4 7h16M4 12h16M4 17h16"/><path class="x" d="M6 6l12 12M18 6 6 18"/></svg></button></div></div>
+  <nav class="pmenu" id="pMenu" aria-label="Menu"><a href="terms.html" target="_blank" rel="noopener">Terms of use</a><a href="privacy.html" target="_blank" rel="noopener">Privacy notice</a><a href="policy.html" target="_blank" rel="noopener">Orders and refunds</a><a href="mailto:support@hosirx.com">Contact support</a><a href="tel:112">Emergency: 112</a></nav>
   <p id="hp">Sell medicine or offer care to patients near you.</p>
   <div class="bar" id="bar"><i id="bi"></i></div>
 </header>
 <main id="app"></main>
 
-<script src="hs-core.js"></script>
+<script>
+(function(){var b=document.getElementById("pmBtn"),m=document.getElementById("pMenu");if(!b||!m)return;
+function set(o){m.classList.toggle("open",o);b.setAttribute("aria-expanded",o)}
+b.onclick=function(e){e.stopPropagation();set(!m.classList.contains("open"))};
+m.addEventListener("click",function(e){if(e.target.closest("a"))set(false)});
+document.addEventListener("click",function(e){if(!m.contains(e.target))set(false)});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")set(false)})})();
+</script>
+<script src="hs-core.js?v=20261110"></script>
 <script>
 (function(){
 "use strict";
@@ -664,9 +689,14 @@ function refresh(){var ae=document.activeElement;if($("#pv")&&!SH&&!(ae&&/INPUT|
 function tabNav(){
   return '<nav class="tabs" aria-label="Sections">'+tabs().map(function(t){var n=bd(t.id);return '<button class="'+(t.id===TB?"on":"")+'" data-a="tab" data-i="'+t.id+'">'+svg(t.i)+t.l+(n?'<span class="bd">'+n+'</span>':'')+'</button>'}).join("")+'</nav>';
 }
+function pFoot(){
+  if(!IN)return "";
+  var em=(window.HOSIRX&&window.HOSIRX.email)||"support@hosirx.com";
+  return '<footer class="pfoot" aria-label="Site footer"><a href="terms.html" target="_blank" rel="noopener">Terms</a><a href="privacy.html" target="_blank" rel="noopener">Privacy</a><a href="policy.html" target="_blank" rel="noopener">Orders and refunds</a><p><a href="mailto:'+em+'" style="margin:0">'+em+'</a></p><p>&copy; '+new Date().getFullYear()+' Hosirx. Hosirx does not replace medical advice. In an emergency call 112.</p></footer>';
+}
 function draw(){
   var v={orders:vOrders,stock:vStock,cons:vCons,earn:vEarn,book:vBook,docs:vDocs}[TB];
-  $("#app").innerHTML='<div id="pv">'+v()+'</div>'+tabNav();
+  $("#app").innerHTML='<div id="pv">'+v()+'</div>'+pFoot()+tabNav();
 }
 function dash(){
   theme();if(!P)pLoad();
@@ -686,6 +716,6 @@ function dash(){
 render();
 })();
 </script>
-<script src="site.js" defer></script>
+<script src="site.js?v=20261110" defer></script>
 </body>
 </html>
