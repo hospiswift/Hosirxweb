@@ -146,6 +146,15 @@ footer a{display:block;text-decoration:none;padding:3px 0}footer a:hover{color:#
 .slide.photo:after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--green),var(--blue));z-index:3}
 .slide.photo .wrap{min-height:520px}
 @media(max-width:900px){.slide.photo{background:linear-gradient(180deg,rgba(37,39,43,.9),rgba(37,39,43,.72) 70%,rgba(37,39,43,.5)),var(--photo) var(--pos,center) /cover no-repeat,#25272B}.slide.photo .wrap{min-height:0;padding-bottom:44px}}
+
+/* animated strip behind search */
+.under{position:relative;overflow:hidden;background:#07101f url(assets/dna-poster.jpg) center/cover}
+.under video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.under:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(37,39,43,.6),rgba(7,16,31,.2) 45%,rgba(7,16,31,.45))}
+.under .ctl,.under .fwrap{position:relative;z-index:2}
+.under .fwrap{background:none;padding:10px 22px 44px}
+.under .finder{box-shadow:0 20px 60px #000a}
+@media(prefers-reduced-motion:reduce){.under video{display:none}}
 </style>
 </head>
 <body>
@@ -158,7 +167,6 @@ footer a{display:block;text-decoration:none;padding:3px 0}footer a:hover{color:#
       <li><a href="#services">Services</a></li><li><a href="#directory">Find care</a></li><li><a href="#how">How it works</a></li><li><a href="#partners">For partners</a></li>
     </ul></nav>
     <div class="sp"></div>
-    <a class="btn o sm hide" href="app.html?join=signin">Sign in</a>
     <button class="btn g sm" data-signup="customer">Sign up</button>
   </div>
 </header>
@@ -170,11 +178,13 @@ footer a{display:block;text-decoration:none;padding:3px 0}footer a:hover{color:#
     <div class="slide p" data-photo="assets/hero-pharmacy.jpg" style="--photo:url(assets/hero-pharmacy.jpg)"><div class="wrap"><div><span class="emb hmark" aria-hidden="true"></span><h2>Medicine from a pharmacy you trust</h2><p class="lead">Compare nearby pharmacies, upload a prescription and order what you need.</p><div class="ctas"><a class="btn g" href="app.html">Shop medicine</a><button class="btn o" data-signup="customer">Sign up free</button></div></div><div class="art" data-scene="pharmacy" role="img" aria-label="A pharmacist handing medicine to a customer"></div></div></div>
     <div class="slide d" data-photo="assets/hero-shop.jpg" style="--photo:url(assets/hero-shop.jpg)"><div class="wrap"><div><span class="emb hmark" aria-hidden="true"></span><h2>Browse the shelf from your phone</h2><p class="lead">See what each pharmacy stocks, add it to your cart and get it delivered.</p><div class="ctas"><button class="btn g" data-signup="customer">Start ordering</button><button class="btn o" data-signup="partner">List your business</button></div></div><div class="art" data-scene="delivery" role="img" aria-label="Shelves of medicine in a pharmacy"></div></div></div>
   </div>
+  <div class="under"><video autoplay muted loop playsinline preload="auto" poster="assets/dna-poster.jpg" aria-hidden="true" tabindex="-1"><source src="assets/dna-loop.mp4" type="video/mp4"></video>
   <div class="ctl"><button class="ar" id="prev" aria-label="Previous slide">‹</button><div class="dots" id="dots"></div><button class="ar" id="next" aria-label="Next slide">›</button></div>
   <div class="fwrap"><div class="finder">
     <div class="tabs" role="tablist" aria-label="What are you looking for"><button role="tab" id="tabP" aria-selected="true">Medicine</button><button role="tab" id="tabH" aria-selected="false">Hospital</button></div>
     <form class="frow" id="finder" role="search"><input id="q" type="search" placeholder="Search a pharmacy, e.g. HealthPlus" aria-label="Search"><button class="btn g" id="fgo" type="submit">Search</button></form>
   </div></div>
+</div>
 </section>
 
 
