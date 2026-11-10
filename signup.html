@@ -110,6 +110,11 @@ header{position:relative}
 .pmenu a+a{border-top:1px solid rgba(255,255,255,.12)}
 .toast{top:auto;bottom:24px;transform:translateX(-50%) translateY(140px)}
 .toast.on{transform:translateX(-50%) translateY(0)}
+/* keep the footer at the bottom on every tab, even when the page is short */
+html{min-height:100%}
+body{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+main{flex:1 0 auto}
+.hx-f{margin-top:auto;flex:none}
 </style>
 </head>
 <body>
@@ -129,7 +134,7 @@ m.addEventListener("click",function(e){if(e.target.closest("a,button"))set(false
 document.addEventListener("click",function(e){if(!m.contains(e.target))set(false)});
 document.addEventListener("keydown",function(e){if(e.key==="Escape")set(false)})})();
 </script>
-<script src="hs-core.js?v=20261110b"></script>
+<script src="hs-core.js?v=20261110c"></script>
 <script>
 (function(){
 "use strict";
@@ -714,6 +719,6 @@ function dash(){
 render();
 })();
 </script>
-<script src="site.js?v=20261110b" defer></script>
+<script src="site.js?v=20261110c" defer></script>
 </body>
 </html>

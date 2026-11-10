@@ -120,6 +120,11 @@ h1,h2,h3,.price{font-family:Sora,Figtree,sans-serif}
 .sf .fine{grid-column:1/-1;border-top:1px solid #fff2;padding-top:16px;font-size:13px}
 @media(max-width:640px){.sfg{grid-template-columns:1fr 1fr}.sfg>div:first-child{grid-column:1/-1}}
 .toast{top:auto;bottom:24px;transform:translateX(-50%) translateY(140px)}.toast.on{transform:translateX(-50%) translateY(0)}
+/* keep the footer at the bottom on every view, even when the page is short */
+html{min-height:100%}
+body{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+main{flex:1 0 auto}
+.hx-f{margin-top:auto;flex:none}
 </style>
 </head>
 <body>
@@ -183,7 +188,7 @@ m.addEventListener("click",function(e){if(e.target.closest("button,a"))set(false
 document.addEventListener("click",function(e){if(!m.contains(e.target))set(false)});
 document.addEventListener("keydown",function(e){if(e.key==="Escape")set(false)})})();
 </script>
-<script src="hs-core.js?v=20261110b"></script>
+<script src="hs-core.js?v=20261110c"></script>
 <script>
 (function(){
 "use strict";
@@ -410,7 +415,7 @@ function sync(){
   ["#bar","#main"].forEach(function(s){$(s).inert=o});
   $("#gate").inert=f;
 }
-function openFrame(mode,demo,type){FR.mode=mode;$("#pf").src="signup.html?v=20261110b&embed="+mode+"&web=1"+(demo?"&demo="+demo:"")+(type?"&type="+type:"");$("#pframe").classList.add("on");sync()}
+function openFrame(mode,demo,type){FR.mode=mode;$("#pf").src="signup.html?v=20261110c&embed="+mode+"&web=1"+(demo?"&demo="+demo:"")+(type?"&type="+type:"");$("#pframe").classList.add("on");sync()}
 function closeFrame(){$("#pframe").classList.remove("on");$("#pf").src="about:blank";sync()}
 window.addEventListener("message",function(e){
   var w=$("#pf").contentWindow;
@@ -496,6 +501,6 @@ enter();
 (function(){var qs=new URLSearchParams(location.search),dm=qs.get("demo");if(dm==="pharm"||dm==="hosp"||dm==="customer"){startDemo(dm);return}var j=qs.get("join");if(!j||SESS)return;if(j==="pharm"||j==="hosp")openFrame("apply",null,j);else showGate("cus",0)})();
 })();
 </script>
-<script src="site.js?v=20261110b" defer></script>
+<script src="site.js?v=20261110c" defer></script>
 </body>
 </html>
